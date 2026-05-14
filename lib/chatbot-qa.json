@@ -1,0 +1,74 @@
+[
+  {
+    "keywords": ["hello", "hi", "hey", "greetings"],
+    "answer": "Hi there! I'm Abishek's virtual assistant. How can I help you learn more about him today?"
+  },
+  {
+    "keywords": ["skills", "what are your skills", "technical skills", "technologies"],
+    "answer": "Abishek is a Full-Stack Developer skilled in React, Next.js, Node.js, TypeScript, Tailwind CSS, MongoDB, MySQL, Git, and more. You can find a detailed list in the 'Skills' section of the portfolio!"
+  },
+  {
+    "keywords": ["experience", "work history", "professional background"],
+    "answer": "Abishek has professional experience as a Full-Stack Developer. For a detailed timeline of his roles and contributions, please check out the 'Experience' section."
+  },
+  {
+    "keywords": ["projects", "portfolio", "what have you built"],
+    "answer": "Abishek has worked on several exciting projects! You can explore his latest work, fetched directly from GitHub, in the 'Projects' section."
+  },
+  {
+    "keywords": ["contact", "get in touch", "email", "reach out"],
+    "answer": "You can contact Abishek using the form in the 'Contact' section. You'll also find his social media links like LinkedIn and GitHub in the footer."
+  },
+  {
+    "keywords": ["location", "where are you based"],
+    "answer": "Abishek is based in the beautiful city of Pokhara, Nepal."
+  },
+  {
+    "keywords": ["resume", "cv", "download resume"],
+    "answer": "You can download Abishek's resume. There's a 'Download Resume' button in the main hero section at the top of the page."
+  },
+  {
+    "keywords": ["name", "who is this portfolio for"],
+    "answer": "This is the professional portfolio of Abishek Khadka, a passionate Full-Stack Developer."
+  },
+  {
+    "keywords": ["thank you", "thanks"],
+    "answer": "You're very welcome! Is there anything else I can help you with regarding Abishek?"
+  },
+  {
+    "keywords": ["bye", "goodbye", "see ya"],
+    "answer": "Goodbye! Thanks for visiting Abishek's portfolio. Have a great day!"
+  },
+  {
+    "keywords": ["who are you", "what are you"],
+    "answer": "I am a friendly virtual assistant for Abishek Khadka's portfolio. I'm here to provide information about his skills, experience, and projects."
+  },
+  {
+    "keywords": ["what can you do", "how can you help"],
+    "answer": "I can tell you about Abishek's technical skills, his professional experience, the projects he's worked on, and how you can get in touch with him. What are you interested in learning more about?"
+  },
+  {
+    "keywords": ["hobbies", "interests outside work"],
+    "answer": "This portfolio primarily focuses on Abishek's professional journey and technical skills. He's very passionate about coding and continuously learning new technologies in the web development space!"
+  },
+  {
+    "keywords": ["availability", "are you available for work", "hire"],
+    "answer": "For inquiries about Abishek's availability for new projects or collaborations, the best way is to reach out to him directly via the contact form or LinkedIn."
+  },
+  {
+    "keywords": ["services", "what services do you offer"],
+    "answer": "Abishek offers a range of services including website development, web application development, and full-stack solutions. You can find more details in the 'About' section."
+  },
+  {
+    "keywords": ["writing", "blog", "articles", "medium"],
+    "answer": "Yes, Abishek shares his thoughts and tutorials on his Medium blog. You can find links to his articles in the 'Writing' section of the portfolio."
+  },
+  {
+    "keywords": ["testimonials", "what do others say"],
+    "answer": "You can read what clients and colleagues say about working with Abishek in the 'Testimonials' section."
+  },
+  {
+    "keywords": ["default_fallback_response"],
+    "answer": "I'm sorry, I didn't quite understand that. Could you please rephrase your question? I can help with information about Abishek's skills, projects, experience, or how to contact him."
+  }
+]

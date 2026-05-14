@@ -1,0 +1,20 @@
+# humans.txt
+# We are people, not machines.
+
+# TEAM
+Developer: Abishek Khadka
+Contact: abishekkhadka90@gmail.com
+LinkedIn: https://linkedin.com/in/khadka27
+GitHub: https://github.com/khadka27
+Twitter: @khadka_27
+Location: Pokhara, Nepal
+
+# SITE
+Last update: 2026-05-14
+Standards: HTML5, CSS3, JavaScript (ESNext), WCAG
+Components: React, Next.js, Tailwind CSS, Framer Motion, Shadcn/UI, Vercel AI SDK
+Software: Visual Studio Code, Git
+Typeface: Inter
+
+# THANKS
+Thanks to the open-source community and the creators of the tools and libraries used in this project.
