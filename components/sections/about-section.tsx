@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Zap,
-  Code,
   Server,
   Sparkles,
   Award,
@@ -97,22 +96,19 @@ const AboutSection = () => {
   const location = userProfile?.location || "Pokhara, Nepal";
 
   return (
-    <section
-      id="about"
-      className="relative container mx-auto px-4 sm:px-6 py-16 md:py-24 overflow-hidden"
-    >
+    <section id="about" className="relative section-shell overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-14 md:mb-18">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4"
+            className="section-kicker mb-4"
           >
             <span className="text-sm font-medium text-primary">About Me</span>
           </motion.div>
@@ -122,7 +118,7 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4"
+            className="section-title text-3xl md:text-4xl lg:text-5xl mb-4"
           >
             Full-Stack Developer & Problem Solver
           </motion.h2>
@@ -132,7 +128,7 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg"
+            className="section-lead"
           >
             Based in Nepal, available for worldwide freelance projects
           </motion.p>
@@ -149,8 +145,8 @@ const AboutSection = () => {
           >
             <div className="relative group">
               {/* Animated rings */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-orange-400 to-amber-500 opacity-75 group-hover:opacity-100 transition-opacity blur-xl animate-pulse"></div>
-              <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-primary to-amber-500 opacity-20 animate-spin-slow"></div>
+              <div className="absolute inset-0 rounded-full bg-linear-to-r from-primary via-orange-400 to-amber-500 opacity-75 group-hover:opacity-100 transition-opacity blur-xl animate-pulse"></div>
+              <div className="absolute -inset-4 rounded-full bg-linear-to-r from-primary to-amber-500 opacity-20 animate-spin-slow"></div>
 
               {/* Profile Image */}
               <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-background shadow-2xl">
@@ -230,7 +226,10 @@ const AboutSection = () => {
 
               <div className="pt-4">
                 <h3 className="text-foreground font-bold text-lg mb-3 flex items-center gap-2">
-                  <span className="h-1 w-6 bg-gradient-to-r from-primary to-amber-500 rounded-full"></span>
+                  <span
+                    className="h-1 w-6 bg-linear-to-r from-primary to-amber-500 rounded-full"
+                    aria-hidden
+                  />
                   I enjoy creating:
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -254,7 +253,10 @@ const AboutSection = () => {
 
               <div>
                 <h3 className="text-foreground font-bold text-lg mb-3 flex items-center gap-2">
-                  <span className="h-1 w-6 bg-gradient-to-r from-primary to-amber-500 rounded-full"></span>
+                  <span
+                    className="h-1 w-6 bg-linear-to-r from-primary to-amber-500 rounded-full"
+                    aria-hidden
+                  />
                   My Tech Stack:
                 </h3>
                 <p>
@@ -285,11 +287,11 @@ const AboutSection = () => {
             >
               <Card className="relative overflow-hidden glass-effect border-2 border-border/50 hover:border-primary/50 transition-all duration-300 p-6 text-center group">
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity`}
+                  className={`absolute inset-0 bg-linear-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity`}
                 ></div>
                 <div className="relative">
                   <div
-                    className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}
+                    className={`text-4xl md:text-5xl font-bold bg-linear-to-r ${stat.color} bg-clip-text text-transparent mb-2`}
                   >
                     {stat.value}
                   </div>
@@ -315,11 +317,11 @@ const AboutSection = () => {
             >
               <Card className="relative overflow-hidden glass-effect border-2 border-border/50 hover:border-primary/50 transition-all duration-300 p-6 h-full group">
                 <div
-                  className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`}
+                  className={`absolute top-0 right-0 w-32 h-32 bg-linear-to-br ${service.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`}
                 ></div>
                 <div className="relative">
                   <div
-                    className={`inline-flex p-3 bg-gradient-to-br ${service.gradient} rounded-xl mb-4 shadow-lg`}
+                    className={`inline-flex p-3 bg-linear-to-br ${service.gradient} rounded-xl mb-4 shadow-lg`}
                   >
                     <service.icon className="h-6 w-6 text-white" />
                   </div>

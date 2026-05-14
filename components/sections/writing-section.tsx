@@ -11,7 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { CalendarDays, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 interface MediumPostItem {
   title: string;
@@ -54,11 +53,11 @@ async function getMediumPosts(username: string): Promise<Post[]> {
       `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${username}`,
       {
         cache: "no-store",
-      }
+      },
     );
     if (!res.ok) {
       console.error(
-        `Failed to fetch Medium RSS feed for @${username}. Status: ${res.status}`
+        `Failed to fetch Medium RSS feed for @${username}. Status: ${res.status}`,
       );
       return [];
     }
@@ -66,7 +65,7 @@ async function getMediumPosts(username: string): Promise<Post[]> {
     if (data.status !== "ok" || !data.items) {
       console.error(
         `RSS to JSON API returned an error or no items for @${username}:`,
-        data
+        data,
       );
       return [];
     }
@@ -76,7 +75,7 @@ async function getMediumPosts(username: string): Promise<Post[]> {
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = item.description;
         const firstParagraph = tempDiv.querySelector("p");
-        if (firstParagraph && firstParagraph.textContent)
+        if (firstParagraph?.textContent)
           plainTextSnippet = firstParagraph.textContent;
         else plainTextSnippet = tempDiv.textContent || tempDiv.innerText || "";
         plainTextSnippet =
@@ -112,7 +111,7 @@ async function getMediumPosts(username: string): Promise<Post[]> {
   } catch (error) {
     console.error(
       `Error fetching or parsing Medium posts for @${username}:`,
-      error
+      error,
     );
     return [];
   }
@@ -137,7 +136,7 @@ const WritingSection = () => {
       setIsLoading(true);
       setError(null);
       try {
-        if (typeof window !== "undefined") {
+        if (typeof globalThis.window !== "undefined") {
           const fetchedPosts = await getMediumPosts("khadka27");
           setPosts(fetchedPosts);
         }
@@ -152,29 +151,25 @@ const WritingSection = () => {
   }, []);
 
   return (
-    <section
-      id="writing"
-      className="container mx-auto px-4 sm:px-6 py-16 md:py-24"
-    >
+    <section id="writing" className="section-shell">
       {/* Header with Medium Logo */}
-      <div className="text-center mb-12 md:mb-16">
+      <div className="text-center mb-14 md:mb-18">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="flex items-center justify-center gap-3 mb-4"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text">
+          <h2 className="section-title text-3xl md:text-4xl lg:text-5xl">
             My Writing
           </h2>
-          
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg"
+          className="section-lead"
         >
           Sharing ideas, tutorials, and thoughts on development from my Medium
           blog.
@@ -183,9 +178,9 @@ const WritingSection = () => {
 
       {isLoading && (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {[...Array(3)].map((_, index) => (
+          {[1, 2, 3].map((cardId) => (
             <Card
-              key={index}
+              key={`skeleton-${cardId}`}
               className="h-full flex flex-col overflow-hidden glass-effect border-border/50"
             >
               <div className="w-full h-48 bg-muted/50 animate-pulse"></div>
@@ -193,7 +188,7 @@ const WritingSection = () => {
                 <div className="h-6 w-3/4 bg-muted/50 animate-pulse rounded"></div>
                 <div className="h-4 w-1/2 bg-muted/50 animate-pulse rounded mt-2"></div>
               </CardHeader>
-              <CardContent className="flex-grow">
+              <CardContent className="grow">
                 <div className="h-4 bg-muted/50 animate-pulse rounded mb-2"></div>
                 <div className="h-4 w-5/6 bg-muted/50 animate-pulse rounded mb-2"></div>
                 <div className="h-4 w-3/4 bg-muted/50 animate-pulse rounded"></div>
@@ -255,7 +250,7 @@ const WritingSection = () => {
                   </div>
                 </CardHeader>
 
-                <CardContent className="flex-grow pb-4">
+                <CardContent className="grow pb-4">
                   <CardDescription className="line-clamp-3 text-sm">
                     {post.snippet}
                   </CardDescription>

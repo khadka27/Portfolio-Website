@@ -1,9 +1,14 @@
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function ProjectCardSkeleton() {
   return (
-    <Card className="flex flex-col bg-brand-dark-secondary border-slate-700 h-full overflow-hidden">
+    <Card className="flex flex-col bg-card border-border h-full overflow-hidden">
       <CardHeader className="pb-2">
         <Skeleton className="h-6 w-3/4 mb-2" />
         <div className="flex gap-2 mt-2">
@@ -11,7 +16,7 @@ export function ProjectCardSkeleton() {
           <Skeleton className="h-5 w-20 rounded-full" />
         </div>
       </CardHeader>
-      <CardContent className="flex-grow pt-0">
+      <CardContent className="grow pt-0">
         <Skeleton className="h-4 w-full mb-1" />
         <Skeleton className="h-4 w-full mb-1" />
         <Skeleton className="h-4 w-5/6" />
@@ -21,7 +26,7 @@ export function ProjectCardSkeleton() {
         <Skeleton className="h-10 w-full sm:flex-1" />
       </CardFooter>
     </Card>
-  )
+  );
 }
 
 export function ProjectsSectionSkeleton() {
@@ -40,5 +45,5 @@ export function ProjectsSectionSkeleton() {
         <ProjectCardSkeleton />
       </div>
     </section>
-  )
+  );
 }

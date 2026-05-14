@@ -53,7 +53,7 @@ const Header = () => {
 
   const handleLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    id: string
+    id: string,
   ) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -66,25 +66,25 @@ const Header = () => {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-lg bg-white/10 dark:bg-black/30 border-b border-border/20",
-        isScrolled ? "shadow-lg" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-lg bg-background/80 border-b border-border/20",
+        isScrolled ? "shadow-lg" : "bg-transparent",
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 h-16 md:h-20">
+      <div className="container mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-12 h-16 md:h-20">
         {/* Logo */}
         <Link
           href="/"
           className="relative text-xl sm:text-2xl font-bold group"
           aria-label={`${siteConfig.name} — home`}
         >
-          <span className="bg-gradient-to-r from-primary to-amber-500 bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-105">
+          <span className="bg-linear-to-r from-primary to-amber-500 bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-105">
             {siteConfig.name}
           </span>
           <motion.div
-            className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary to-amber-500"
+            className="absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-primary to-amber-500"
             initial={{ width: 0 }}
             whileHover={{ width: "100%" }}
             transition={{ duration: 0.3 }}
@@ -106,7 +106,7 @@ const Header = () => {
                 "hover:bg-primary/10 hover:text-primary",
                 activeSection === item.id
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               {item.name}
@@ -148,11 +148,11 @@ const Header = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className={cn(
-              "md:hidden glass-effect border-t border-border/50 backdrop-blur-lg bg-white/10 dark:bg-black/30"
+              "md:hidden glass-effect border-t border-border/50 backdrop-blur-lg",
             )}
           >
             <nav
-              className="container mx-auto px-4 py-4 flex flex-col space-y-1"
+              className="container mx-auto px-6 sm:px-8 lg:px-12 py-4 flex flex-col space-y-1"
               aria-label="Primary"
             >
               {navItems.map((item, index) => (
@@ -170,7 +170,7 @@ const Header = () => {
                       "hover:bg-primary/10 hover:text-primary",
                       activeSection === item.id
                         ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground"
+                        : "text-muted-foreground",
                     )}
                   >
                     {item.name}

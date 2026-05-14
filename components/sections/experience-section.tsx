@@ -109,21 +109,18 @@ const iconVariants = {
 
 const ExperienceSection = () => {
   return (
-    <section
-      id="experience"
-      className="relative container mx-auto px-4 sm:px-6 py-16 md:py-24 overflow-hidden"
-    >
+    <section id="experience" className="relative section-shell overflow-hidden">
       {/* Background Gradient Blur */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-14 md:mb-18">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4"
+            className="section-title text-3xl md:text-4xl lg:text-5xl mb-4"
           >
             My Experience
           </motion.h2>
@@ -132,7 +129,7 @@ const ExperienceSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg"
+            className="section-lead"
           >
             Professional journey building scalable applications and digital
             products
@@ -140,9 +137,9 @@ const ExperienceSection = () => {
         </div>
 
         <div className="max-w-5xl mx-auto">
-          {experiences.map((exp, index) => (
+          {experiences.map((exp) => (
             <motion.div
-              key={index}
+              key={`${exp.company}-${exp.role}`}
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
@@ -150,10 +147,10 @@ const ExperienceSection = () => {
             >
               <Card className="relative glass-effect border-2 border-border/50 hover:border-primary/50 transition-all duration-500 p-0 overflow-hidden group">
                 {/* Decorative gradient bar */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-orange-400 to-amber-500"></div>
+                <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-primary via-orange-400 to-amber-500"></div>
 
                 {/* Hover glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div className="relative p-6 sm:p-8">
                   {/* Header Section */}
@@ -180,7 +177,7 @@ const ExperienceSection = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary/20 to-primary/10 border-2 border-primary/30 rounded-full text-primary font-bold text-sm whitespace-nowrap shadow-lg shadow-primary/10">
+                    <div className="flex items-center gap-2 px-5 py-2.5 bg-linear-to-r from-primary/20 to-primary/10 border-2 border-primary/30 rounded-full text-primary font-bold text-sm whitespace-nowrap shadow-lg shadow-primary/10">
                       <div className="h-2 w-2 bg-primary rounded-full animate-pulse"></div>
                       {exp.type}
                     </div>
@@ -219,13 +216,16 @@ const ExperienceSection = () => {
                   {/* Responsibilities with Icons */}
                   <div className="space-y-6 mb-8">
                     <h4 className="font-bold text-foreground text-xl flex items-center gap-2">
-                      <span className="h-1 w-8 bg-gradient-to-r from-primary to-amber-500 rounded-full"></span>
+                      <span
+                        className="h-1 w-8 bg-linear-to-r from-primary to-amber-500 rounded-full"
+                        aria-hidden
+                      />
                       Key Responsibilities
                     </h4>
                     <div className="grid gap-4">
                       {exp.responsibilities.map((item, i) => (
                         <motion.div
-                          key={i}
+                          key={item.text}
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
@@ -253,7 +253,10 @@ const ExperienceSection = () => {
                   {/* Technologies */}
                   <div className="space-y-4">
                     <h4 className="font-bold text-foreground text-xl flex items-center gap-2">
-                      <span className="h-1 w-8 bg-gradient-to-r from-primary to-amber-500 rounded-full"></span>
+                      <span
+                        className="h-1 w-8 bg-linear-to-r from-primary to-amber-500 rounded-full"
+                        aria-hidden
+                      />
                       Tech Stack
                     </h4>
                     <div className="flex flex-wrap gap-2.5">
@@ -265,7 +268,7 @@ const ExperienceSection = () => {
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.05 }}
                           whileHover={{ scale: 1.05, y: -2 }}
-                          className="px-4 py-2 bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/30 text-primary rounded-lg text-sm font-semibold hover:bg-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all cursor-default"
+                          className="px-4 py-2 bg-linear-to-br from-primary/10 to-primary/5 border border-primary/30 text-primary rounded-lg text-sm font-semibold hover:bg-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all cursor-default"
                         >
                           {tech}
                         </motion.span>

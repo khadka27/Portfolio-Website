@@ -180,6 +180,17 @@ const InfiniteScroll = ({
       className="relative overflow-hidden py-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      role="button"
+      tabIndex={0}
+      aria-label="Pause or resume the skills carousel"
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setIsPaused((current) => !current);
+        }
+      }}
     >
       <motion.div
         className="flex gap-4"
@@ -200,7 +211,7 @@ const InfiniteScroll = ({
         {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
           <div
             key={`${skill.name}-${index}`}
-            className="flex-shrink-0 w-24 h-24 p-4 glass-effect border border-border/50 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary/50 hover:scale-105 transition-all duration-300"
+            className="shrink-0 w-24 h-24 p-4 glass-effect border border-border/50 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary/50 hover:scale-105 transition-all duration-300"
           >
             <div className="relative w-10 h-10">
               <Image
@@ -222,17 +233,14 @@ const InfiniteScroll = ({
 
 const SkillsSection = () => {
   return (
-    <section
-      id="skills"
-      className="container mx-auto px-4 sm:px-6 py-16 md:py-24 overflow-hidden"
-    >
+    <section id="skills" className="section-shell overflow-hidden">
       {/* Header */}
-      <div className="text-center mb-12 md:mb-16">
+      <div className="text-center mb-14 md:mb-18">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4"
+          className="section-title text-3xl md:text-4xl lg:text-5xl mb-4"
         >
           Technical Skills
         </motion.h2>
@@ -241,7 +249,7 @@ const SkillsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg"
+          className="section-lead"
         >
           Technologies and tools I use to build modern applications. Hover to
           pause scrolling.
@@ -260,7 +268,7 @@ const SkillsSection = () => {
             className="space-y-3"
           >
             <h3 className="text-lg md:text-xl font-semibold text-foreground flex items-center gap-3 px-2">
-              <span className="h-1 w-8 bg-gradient-to-r from-primary to-amber-500 rounded-full"></span>
+              <span className="h-1 w-8 bg-linear-to-r from-primary to-amber-500 rounded-full"></span>
               {category}
               <span className="text-sm text-muted-foreground font-normal">
                 ({skills.length})

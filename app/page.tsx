@@ -15,7 +15,11 @@ export default async function Home() {
   const profile = await getGithubUserProfile("khadka27");
 
   return (
-    <main id="main-content" tabIndex={-1} className="outline-none">
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="outline-none pt-16 md:pt-20 space-y-12 md:space-y-16 pb-12 md:pb-16"
+    >
       <HeroSection githubProfileImage={profile?.avatar_url} />
       <SkillsBarSection />
       <AboutSection />{" "}
