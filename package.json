@@ -52,7 +52,7 @@
     "framer-motion": "latest",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
-    "next": "latest",
+    "next": "^16.1.0",
     "next-themes": "latest",
     "prop-types": "latest",
     "react": "latest",
