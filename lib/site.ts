@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 /** Canonical origin, no trailing slash. Set `NEXT_PUBLIC_SITE_URL` in production. */
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.abishekkhadka27.com.np"
 ).replace(/\/$/, "");
 
 export const siteConfig = {
