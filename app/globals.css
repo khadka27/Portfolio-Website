@@ -1,86 +1,54 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+@theme {
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-input: hsl(214.3 31.8% 91.4%);
+  --color-ring: hsl(25 95% 53%);
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-primary: hsl(25 95% 53%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(210 40% 96.1%);
+  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --color-muted: hsl(210 40% 96.1%);
+  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-accent: hsl(25 95% 53%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(210 40% 98%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(222.2 84% 4.9%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(222.2 84% 4.9%);
+}
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 25 95% 53%; /* brand-accent: #ED8936 */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 25 95% 53%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 25 95% 53%;
-
-    --radius: 0.5rem;
-
-    --brand-accent-val: 25 95% 53%;
-    --brand-accent-hover-val: 25 95% 48%;
-
-    --brand-bg-light-val: 0 0% 100%;
-    --brand-text-light-val: 222.2 84% 4.9%;
-    --brand-card-light-val: 210 40% 98%;
-
-    --brand-bg-dark-val: 222.2 84% 4.9%;
-    --brand-text-dark-val: 210 40% 98%;
-    --brand-card-dark-val: 220 27% 15%;
-  }
-
-  .dark {
-    --background: var(--brand-bg-dark-val);
-    --foreground: var(--brand-text-dark-val);
-
-    --card: var(--brand-card-dark-val);
-    --card-foreground: var(--brand-text-dark-val);
-
-    --popover: var(--brand-bg-dark-val);
-    --popover-foreground: var(--brand-text-dark-val);
-
-    --primary: var(--brand-accent-val);
-    --primary-foreground: 222.2 84% 4.9%;
-
-    --secondary: 220 27% 15%;
-    --secondary-foreground: var(--brand-text-dark-val);
-
-    --muted: 220 27% 15%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: var(--brand-accent-val);
-    --accent-foreground: 222.2 84% 4.9%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: var(--brand-text-dark-val);
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: var(--brand-accent-val);
+.dark {
+  @theme {
+    --color-background: hsl(222.2 84% 4.9%);
+    --color-foreground: hsl(210 40% 98%);
+    --color-card: hsl(220 27% 15%);
+    --color-card-foreground: hsl(210 40% 98%);
+    --color-popover: hsl(222.2 84% 4.9%);
+    --color-popover-foreground: hsl(210 40% 98%);
+    --color-primary-foreground: hsl(222.2 84% 4.9%);
+    --color-secondary: hsl(220 27% 15%);
+    --color-secondary-foreground: hsl(210 40% 98%);
+    --color-muted: hsl(220 27% 15%);
+    --color-muted-foreground: hsl(215 20.2% 65.1%);
+    --color-accent-foreground: hsl(222.2 84% 4.9%);
+    --color-destructive: hsl(0 62.8% 30.6%);
+    --color-destructive-foreground: hsl(210 40% 98%);
+    --color-border: hsl(217.2 32.6% 17.5%);
+    --color-input: hsl(217.2 32.6% 17.5%);
   }
 }
 
 @layer base {
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 
   html {
