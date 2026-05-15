@@ -1,17 +1,30 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/lib/site";
+import { siteUrl, siteConfig } from "@/lib/site";
 
-/**
- * Single-page portfolio: list only the canonical URL.
- * Hash fragment routes (/#about) are not valid sitemap URLs for crawlers.
- */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: siteUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
+  const sections = [
+    "",
+    "#about",
+    "#experience",
+    "#skills",
+    "#projects",
+    "#writing",
+    "#contact",
   ];
+
+  const sectionLinks = sections.map((section) => ({
+    url: `${siteUrl}${section}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: section === "" ? 1 : 0.8,
+  }));
+
+  const socialLinks = siteConfig.sameAs.map((url) => ({
+    url,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  return [...sectionLinks, ...socialLinks];
 }
