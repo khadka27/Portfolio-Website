@@ -109,7 +109,7 @@ export default function CommitVisualizer() {
   };
 
   return (
-    <div className="card-base p-6 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 select-none">
+    <div className="card-base p-6 max-w-5xl mx-auto flex flex-col md:flex-row md:items-center gap-8 select-none overflow-hidden">
       
       {/* 1. Left visual intro info */}
       <div className="w-full md:w-1/3 space-y-4">
