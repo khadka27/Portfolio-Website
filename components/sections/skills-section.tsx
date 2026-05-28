@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Layers, RotateCw, AlignLeft } from "lucide-react";
+import { Layers, RotateCw, AlignLeft, GitBranch } from "lucide-react";
 import SkillsOrbit from "./skills-orbit";
+import TechTimeline from "./tech-timeline";
 
 
 const CATS = {
@@ -102,7 +103,7 @@ function MarqueeRow({
 
 export default function SkillsSection() {
   const [paused, setPaused] = useState(false);
-  const [viewMode, setViewMode] = useState<"marquee" | "orbit">("marquee");
+  const [viewMode, setViewMode] = useState<"marquee" | "orbit" | "timeline">("marquee");
   const entries = Object.entries(CATS);
 
   return (
@@ -137,11 +138,11 @@ export default function SkillsSection() {
         </motion.p>
       </div>
 
-      {/* ── View Selector Tabs ──────────────── */}
-      <div className="flex justify-center gap-3 mb-10">
+      {/* ── View Selector Tabs ────────── */}
+      <div className="flex justify-center gap-3 mb-10 flex-wrap">
         <button
           onClick={() => setViewMode("marquee")}
-          className={`flex items-center gap-2 px-4.5 py-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
             viewMode === "marquee"
               ? "bg-primary border-primary text-white"
               : "bg-card border-border hover:border-primary/45 text-muted-foreground hover:text-foreground"
@@ -152,7 +153,7 @@ export default function SkillsSection() {
         </button>
         <button
           onClick={() => setViewMode("orbit")}
-          className={`flex items-center gap-2 px-4.5 py-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
             viewMode === "orbit"
               ? "bg-primary border-primary text-white"
               : "bg-card border-border hover:border-primary/45 text-muted-foreground hover:text-foreground"
@@ -161,9 +162,20 @@ export default function SkillsSection() {
           <RotateCw className="h-3.5 w-3.5 animate-[spin_40s_linear_infinite]" />
           3D Gravity Orbit
         </button>
+        <button
+          onClick={() => setViewMode("timeline")}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+            viewMode === "timeline"
+              ? "bg-primary border-primary text-white"
+              : "bg-card border-border hover:border-primary/45 text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <GitBranch className="h-3.5 w-3.5" />
+          Learning Timeline
+        </button>
       </div>
 
-      {/* ── Active View Rendering ───────────── */}
+      {/* ── Active View Rendering ───────── */}
       {viewMode === "marquee" ? (
         <div
           className="space-y-5"
@@ -186,13 +198,21 @@ export default function SkillsSection() {
             </motion.div>
           ))}
         </div>
-      ) : (
+      ) : viewMode === "orbit" ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <SkillsOrbit />
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <TechTimeline />
         </motion.div>
       )}
     </section>

@@ -375,9 +375,9 @@ export default function IDEPlayground() {
                 <div 
                   key={idx} 
                   className={
-                    log.startsWith("Process finished") 
+                    log && log.startsWith("Process finished") 
                       ? "text-emerald-500 font-bold" 
-                      : log.startsWith("ts-node") || log.startsWith("jq") || log.startsWith("./") || log.startsWith("cat")
+                      : log && (log.startsWith("ts-node") || log.startsWith("jq") || log.startsWith("./") || log.startsWith("cat"))
                       ? "text-sky-400"
                       : "text-amber-500/80"
                   }

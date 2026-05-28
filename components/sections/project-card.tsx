@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Eye, Star, GitFork, Code2 } from "lucide-react";
+import { ExternalLink, Eye, Star, GitFork, Code2, BookOpen } from "lucide-react";
 import TiltCard from "@/components/ui/tilt-card";
+import ProjectCaseStudyModal from "./project-case-study-modal";
 
 interface Repo {
   id: number; name: string; description: string;
@@ -24,6 +26,7 @@ export default function ProjectCard({
 }: {
   repo: Repo; index: number; languageColor: Record<string, string>;
 }) {
+  const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -84,7 +87,7 @@ export default function ProjectCard({
           </p>
 
           {/* Actions */}
-          <div className="flex gap-2 mt-auto">
+          <div className="flex gap-2 mt-auto flex-wrap">
             <a
               href={repo.html_url} target="_blank" rel="noopener noreferrer"
               className="flex-1 btn-primary justify-center py-2 text-[12px] rounded-lg"
@@ -99,10 +102,24 @@ export default function ProjectCard({
                 Live <Eye className="h-3.5 w-3.5" />
               </a>
             )}
+            <button
+              onClick={() => setCaseStudyOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-2 text-[12px] rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 text-muted-foreground hover:text-primary transition-all duration-200 cursor-pointer"
+              title="View Case Study"
+            >
+              <BookOpen className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Case Study</span>
+            </button>
           </div>
         </div>
       </div>
     </TiltCard>
+
+    <ProjectCaseStudyModal
+      repoName={repo.name}
+      open={caseStudyOpen}
+      onClose={() => setCaseStudyOpen(false)}
+    />
   </motion.div>
 );
 }

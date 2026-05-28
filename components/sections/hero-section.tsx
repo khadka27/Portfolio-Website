@@ -18,7 +18,7 @@ import TiltCard from "@/components/ui/tilt-card";
 const FADE = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
 interface HeroProps {
@@ -32,7 +32,7 @@ export default function HeroSection({ githubProfileImage }: HeroProps) {
   return (
     <section
       id="home"
-      className="relative section-shell min-h-[calc(85vh-4rem)] flex flex-col md:flex-row items-center justify-between gap-12 pt-16 md:pt-24 overflow-hidden"
+      className="relative section-shell min-h-[calc(80vh-4rem)] flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 pt-20 md:pt-28 pb-8 md:pb-0 overflow-hidden"
     >
       {/* ── Grid texture ─────────────────────── */}
       <div
@@ -217,7 +217,7 @@ export default function HeroSection({ githubProfileImage }: HeroProps) {
           <div className="absolute inset-0 rounded-full bg-primary/15 blur-3xl scale-90" />
 
           {/* Profile photo */}
-          <div className="relative h-64 w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 overflow-hidden rounded-full border-4 border-background ring-2 ring-primary/30">
+          <div className="relative h-48 w-48 sm:h-60 sm:w-60 md:h-72 md:w-72 lg:h-80 lg:w-80 overflow-hidden rounded-full border-4 border-background ring-2 ring-primary/30">
             <Image
               src={githubProfileImage || "/placeholder.svg"}
               alt={`${siteConfig.name} -full-stack developer`}
@@ -228,14 +228,14 @@ export default function HeroSection({ githubProfileImage }: HeroProps) {
           </div>
 
           {/* Floating chip -bottom right */}
-          <motion.div className="anim-float absolute bottom-4 -right-4 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground">
+          <motion.div className="anim-float absolute bottom-3 right-0 sm:-right-2 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-md">
             <Code2 className="h-3.5 w-3.5 text-primary" />
             Full-Stack Dev
           </motion.div>
 
           {/* Floating chip -top left */}
           <motion.div
-            className="anim-float absolute top-4 -left-4 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground"
+            className="anim-float absolute top-3 left-0 sm:-left-2 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-md"
             style={{ animationDelay: "1.8s" }}
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-500" />

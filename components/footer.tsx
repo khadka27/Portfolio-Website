@@ -54,7 +54,7 @@ export default function Footer() {
       <div aria-hidden className="pointer-events-none absolute left-[15%] bottom-0 h-44 w-80 rounded-full bg-primary/5 blur-[80px]" />
       <div aria-hidden className="pointer-events-none absolute right-[15%] top-0 h-44 w-80 rounded-full bg-amber-500/5 blur-[90px]" />
 
-      <div className="page-shell py-14 relative z-10">
+      <div className="page-shell py-14 pb-28 md:pb-14 relative z-10">
         
         {/* Main 3-Column Layout Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 border-b border-border/40 pb-10">

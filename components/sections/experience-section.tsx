@@ -209,7 +209,7 @@ export default function ExperienceSection() {
           className="lg:col-span-7 card-base p-6 md:p-8 space-y-6"
         >
           {/* Tab selector buttons */}
-          <div className="flex border-b border-border/50 pb-2 gap-2 overflow-x-auto scrollbar-none">
+          <div className="flex border-b border-border/50 pb-2 gap-1.5 overflow-x-auto scrollbar-none">
             {[
               { id: "contributions", label: "Key Impact", icon: CheckCircle2 },
               { id: "projects", label: "Featured Projects", icon: Cpu },
@@ -221,13 +221,13 @@ export default function ExperienceSection() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-200 shrink-0 focus:outline-none ${
+                  className={`flex items-center gap-1.5 px-3 py-2 text-[11px] font-bold uppercase tracking-wider rounded-xl transition-all duration-200 shrink-0 focus:outline-none ${
                     active
                       ? "bg-primary text-white"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3.5 w-3.5" />
                   {tab.label}
                 </button>
               );

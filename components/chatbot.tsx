@@ -269,7 +269,7 @@ export default function Chatbot() {
   return (
     <>
       <motion.div
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-50"
         initial={prefersReducedMotion ? { opacity: 0 } : { scale: 0 }}
         animate={prefersReducedMotion ? { opacity: 1 } : { scale: 1 }}
         transition={
@@ -321,7 +321,7 @@ export default function Chatbot() {
               transition={
                 prefersReducedMotion ? { duration: 0.01 } : { duration: 0.3 }
               }
-              className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] max-w-sm h-[70vh] max-h-[500px] bg-card border border-border shadow-xl rounded-lg flex flex-col overflow-hidden"
+              className="fixed bottom-44 md:bottom-24 right-4 md:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm h-[65vh] md:h-[70vh] max-h-[500px] bg-card border border-border shadow-xl rounded-lg flex flex-col overflow-hidden"
             >
               <header className="p-4 border-b border-border flex items-center justify-between bg-background">
                 <h3

@@ -47,11 +47,11 @@ export default function DevBadgeCard({ avatarUrl, location = "Pokhara, Nepal" }:
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full max-w-[320px]">
+    <div className="flex flex-col items-center gap-6 w-full max-w-[320px] mx-auto">
       
       {/* 3D Flippable Container */}
       <div 
-        className="w-full aspect-[2/3] max-w-[300px] relative select-none"
+        className="w-full aspect-[2/3] max-w-[280px] sm:max-w-[300px] relative select-none"
         style={{ perspective: "1200px" }}
       >
         <motion.div

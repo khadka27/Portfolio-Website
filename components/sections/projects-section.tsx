@@ -3,6 +3,8 @@ import ProjectsGrid from "./projects-grid";
 import ProjectsHeader from "./projects-header";
 import CommitVisualizer from "./commit-visualizer";
 import GitBranchSimulator from "./git-branch-simulator";
+import GitHubActivityFeed from "./github-activity-feed";
+import GitHubSkyline from "./github-skyline";
 
 
 interface Repo {
@@ -76,12 +78,32 @@ export default async function ProjectsSection() {
         </div>
       )}
 
+      {/* GitHub Live Activity Feed */}
+      <GitHubActivityFeed />
+
       {repos.length > 0 && (
         <div className="mt-16 pt-12 border-t border-border/40 flex flex-col gap-6">
           <CommitVisualizer />
           <GitBranchSimulator />
         </div>
       )}
+
+      {/* 3D GitHub Contribution Skyline */}
+      <div className="mt-16 pt-12 border-t border-border/40">
+        <div className="text-center mb-8">
+          <span className="section-eyebrow mb-4 inline-flex">
+            3D Contribution Skyline
+          </span>
+          <h3 className="text-xl font-extrabold text-foreground mt-3">
+            GitHub Activity — Last 52 Weeks
+          </h3>
+          <p className="text-sm text-muted-foreground mt-1">
+            Hover any bar to inspect contributions. Tilt shows depth over time.
+          </p>
+        </div>
+        <GitHubSkyline />
+      </div>
     </section>
   );
 }
+

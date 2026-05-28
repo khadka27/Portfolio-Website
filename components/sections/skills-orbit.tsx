@@ -43,7 +43,7 @@ export default function SkillsOrbit() {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center bg-radial-gradient from-primary/5 to-transparent rounded-full border border-border/20 p-6 overflow-visible select-none"
+      className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center bg-radial-gradient from-primary/5 to-transparent rounded-full border border-border/20 p-6 overflow-hidden select-none"
     >
       {/* Gravity Center Nucleus */}
       <div className="relative z-10 w-20 h-20 rounded-full bg-card border-2 border-primary/50 shadow-lg shadow-primary/20 flex flex-col items-center justify-center">

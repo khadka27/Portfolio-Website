@@ -20,6 +20,8 @@ import TerminalConsole from "@/components/terminal-console";
 import AchievementsTracker from "@/components/achievements-tracker";
 import ThemeConfigurator from "@/components/theme-configurator";
 import RetroArcade from "@/components/retro-arcade";
+import KonamiEasterEgg from "@/components/konami-easter-egg";
+import SpotifyWidget from "@/components/spotify-widget";
 
 
 
@@ -69,6 +71,8 @@ export default function RootLayout({
           <AchievementsTracker />
           <ThemeConfigurator />
           <RetroArcade />
+          <KonamiEasterEgg />
+          <SpotifyWidget />
         </ThemeProvider>
       </body>
     </html>

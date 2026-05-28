@@ -68,7 +68,7 @@ const inView = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-60px" },
-  transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
 export default function AboutSection({
@@ -108,7 +108,7 @@ export default function AboutSection({
       </div>
 
       {/* ── Main 2-col ──────────────────────── */}
-      <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 max-w-6xl mx-auto mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16 max-w-6xl mx-auto mb-12">
         {/* Left -avatar + highlights */}
         <motion.div
           initial={{ opacity: 0, x: -36 }}
@@ -121,7 +121,7 @@ export default function AboutSection({
           <DevBadgeCard avatarUrl={githubAvatarUrl} location={loc} />
 
           {/* Highlight pills */}
-          <div className="grid grid-cols-2 gap-2.5 w-full max-w-[260px] mt-4">
+          <div className="grid grid-cols-2 gap-2.5 w-full max-w-xs mt-4">
             {HIGHLIGHTS.map((h, i) => (
               <motion.div
                 key={h.text}

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build --turbo",
-    "start": "next start --turbo",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -55,9 +55,9 @@
     "next": "^16.1.0",
     "next-themes": "latest",
     "prop-types": "latest",
-    "react": "latest",
+    "react": "^18.2.0",
     "react-day-picker": "8.10.1",
-    "react-dom": "latest",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.1",
     "react-resizable-panels": "^2.1.7",
     "react-type-animation": "latest",
