@@ -57,9 +57,11 @@ export default function RootLayout({
           <JsonLd data={siteJsonLdGraph} />
           <SkipToContent />
           <ScrollProgress />
-          <Header />
-          <div className="pb-20 md:pb-0">{children}</div>
-          <Footer />
+          <div className="relative flex min-h-screen flex-col overflow-x-hidden w-full">
+            <Header />
+            <div className="flex-1 pb-20 md:pb-0">{children}</div>
+            <Footer />
+          </div>
           <MobileBottomNav />
           <ScrollToTopButton />
           <Chatbot />
