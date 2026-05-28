@@ -1,84 +1,42 @@
 "use client";
+
 import { motion } from "framer-motion";
 
-const skills = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "MongoDB",
-  "TailwindCSS",
-  "Git",
+const SKILLS = [
+  "Next.js", "React", "TypeScript", "Node.js",
+  "MongoDB", "PostgreSQL", "TailwindCSS", "Git",
+  "Docker", "AWS", "Socket.io", "Prisma",
 ];
 
-const SkillsBarSection = () => {
+// Double for seamless loop
+const DOUBLED = [...SKILLS, ...SKILLS];
+
+export default function SkillsBarSection() {
   return (
-    <section className="relative section-shell-tight overflow-hidden">
-      {/* Subtle Background */}
-      <div className="absolute inset-0 bg-linear-to-b from-background via-primary/3 to-background"></div>
+    <div className="section-line py-8 overflow-hidden">
+      <p className="text-center text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground mb-5">
+        Core Technologies
+      </p>
 
-      <div className="relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <h3 className="section-title text-2xl md:text-3xl">
-            Core Technologies
-          </h3>
-        </motion.div>
+      {/* Marquee strip */}
+      <div className="relative overflow-hidden" aria-hidden>
+        {/* Fade edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-20 z-10"
+          style={{ background: "linear-gradient(to right, var(--bg), transparent)" }} />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 z-10"
+          style={{ background: "linear-gradient(to left, var(--bg), transparent)" }} />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-wrap justify-center items-center gap-3 md:gap-4"
-        >
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.08,
-                type: "spring",
-                stiffness: 100,
-              }}
-              whileHover={{
-                scale: 1.1,
-                y: -5,
-                transition: { duration: 0.2 },
-              }}
-              className="group relative"
+        <div className="flex gap-3 marquee-left w-max">
+          {DOUBLED.map((s, i) => (
+            <span
+              key={i}
+              className="shrink-0 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-muted-foreground hover:border-primary/50 hover:text-primary transition-colors duration-200 cursor-default"
             >
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-linear-to-r from-primary to-amber-500 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 rounded-xl"></div>
-
-              {/* Badge */}
-              <div className="relative">
-                <div className="px-5 py-2.5 md:px-6 md:py-3 bg-linear-to-r from-primary via-orange-400 to-amber-500 rounded-xl font-bold text-white text-sm md:text-base shadow-lg group-hover:shadow-2xl group-hover:shadow-primary/50 transition-all duration-300 cursor-default">
-                  <span className="relative z-10">{skill}</span>
-                </div>
-              </div>
-
-              {/* Shine effect */}
-              <div className="absolute inset-0 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              </div>
-            </motion.div>
+              {s}
+            </span>
           ))}
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </div>
   );
-};
-
-export default SkillsBarSection;
+}

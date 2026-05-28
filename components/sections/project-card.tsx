@@ -1,121 +1,108 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Eye, Star, GitFork } from "lucide-react";
+import { ExternalLink, Eye, Star, GitFork, Code2 } from "lucide-react";
+import TiltCard from "@/components/ui/tilt-card";
 
 interface Repo {
-  id: number;
-  name: string;
-  description: string;
-  html_url: string;
-  stargazers_count: number;
-  forks_count: number;
-  language: string;
-  homepage: string | null;
-  topics: string[];
+  id: number; name: string; description: string;
+  html_url: string; stargazers_count: number; forks_count: number;
+  language: string; homepage: string | null; topics: string[];
 }
 
-interface ProjectCardProps {
-  repo: Repo;
-  index: number;
-  languageColor: { [key: string]: string };
-}
+const LANG_STYLE: Record<string, string> = {
+  JavaScript: "text-yellow-600 bg-yellow-50  border-yellow-200 dark:text-yellow-400 dark:bg-yellow-400/10 dark:border-yellow-400/25",
+  TypeScript: "text-blue-600  bg-blue-50    border-blue-200   dark:text-blue-400   dark:bg-blue-400/10   dark:border-blue-400/25",
+  HTML:       "text-orange-600 bg-orange-50 border-orange-200 dark:text-orange-400 dark:bg-orange-400/10 dark:border-orange-400/25",
+  CSS:        "text-indigo-600 bg-indigo-50 border-indigo-200 dark:text-indigo-400 dark:bg-indigo-400/10 dark:border-indigo-400/25",
+  Python:     "text-green-600  bg-green-50  border-green-200  dark:text-green-400  dark:bg-green-400/10  dark:border-green-400/25",
+  Java:       "text-red-600    bg-red-50    border-red-200    dark:text-red-400    dark:bg-red-400/10    dark:border-red-400/25",
+};
 
 export default function ProjectCard({
-  repo,
-  index,
-  languageColor,
-}: ProjectCardProps) {
+  repo, index, languageColor: _lc,
+}: {
+  repo: Repo; index: number; languageColor: Record<string, string>;
+}) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ amount: 0.2, once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ amount: 0.1, once: true }}
+      transition={{ delay: index * 0.07, duration: 0.55, ease: [0.22,1,0.36,1] }}
       className="h-full"
     >
-      <Card className="group flex flex-col bg-card border-border h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 hover:border-primary/50">
-        <CardHeader className="pb-3 space-y-3">
-          <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-lg sm:text-xl font-bold  line-clamp-1">
+      <TiltCard className="h-full">
+        <div className="group card-base h-full flex flex-col overflow-hidden">
+        {/* Top orange reveal bar */}
+        <div className="h-0 group-hover:h-[3px] bg-primary transition-all duration-300" />
+
+        <div className="flex flex-col flex-1 p-5">
+
+          {/* Header row */}
+          <div className="flex items-start justify-between gap-2 mb-3">
+            <div className="flex items-center gap-2.5">
+              <div className="rounded-lg bg-primary/10 border border-primary/20 p-1.5 flex-shrink-0">
+                <Code2 className="h-3.5 w-3.5 text-primary" />
+              </div>
               <a
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
+                href={repo.html_url} target="_blank" rel="noopener noreferrer"
+                className="text-base font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors duration-200"
               >
                 {repo.name}
               </a>
-            </CardTitle>
-            {repo.stargazers_count > 0 && (
-              <div className="flex items-center gap-1 text-muted-foreground text-sm shrink-0">
-                <Star className="w-4 h-4" />
-                <span>{repo.stargazers_count}</span>
+            </div>
+
+            {/* Stars / forks */}
+            {(repo.stargazers_count > 0 || repo.forks_count > 0) && (
+              <div className="flex gap-3 text-xs text-muted-foreground flex-shrink-0">
+                {repo.stargazers_count > 0 && (
+                  <span className="flex items-center gap-1"><Star className="h-3.5 w-3.5" />{repo.stargazers_count}</span>
+                )}
+                {repo.forks_count > 0 && (
+                  <span className="flex items-center gap-1"><GitFork className="h-3.5 w-3.5" />{repo.forks_count}</span>
+                )}
               </div>
             )}
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
             {repo.language && (
-              <span
-                className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${
-                  languageColor[repo.language] ||
-                  "text-muted-foreground border-border"
-                }`}
-              >
+              <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${LANG_STYLE[repo.language] || "text-muted-foreground border-border bg-muted"}`}>
                 {repo.language}
               </span>
             )}
-            {repo.topics.slice(0, 2).map((topic) => (
-              <span
-                key={topic}
-                className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
-              >
-                {topic}
-              </span>
+            {repo.topics.slice(0, 2).map(t => (
+              <span key={t} className="chip">{t}</span>
             ))}
           </div>
-        </CardHeader>
 
-        <CardContent className="flex-grow pb-4">
-          <CardDescription className="text-sm leading-relaxed line-clamp-3">
-            {repo.description || "No description available."}
-          </CardDescription>
-        </CardContent>
+          {/* Description */}
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 flex-1 mb-5">
+            {repo.description || "No description provided."}
+          </p>
 
-        <CardFooter className="flex flex-col gap-2 pt-0">
-          <Button
-            asChild
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium shadow-md group/btn"
-          >
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-              <span>View on GitHub</span>
-              <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-            </a>
-          </Button>
-          {repo.homepage && (
-            <Button
-              asChild
-              variant="outline"
-              className="w-full border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground font-medium group/btn"
+          {/* Actions */}
+          <div className="flex gap-2 mt-auto">
+            <a
+              href={repo.html_url} target="_blank" rel="noopener noreferrer"
+              className="flex-1 btn-primary justify-center py-2 text-[12px] rounded-lg"
             >
-              <a href={repo.homepage} target="_blank" rel="noopener noreferrer">
-                <span>Live Demo</span>
-                <Eye className="w-4 h-4 ml-2 group-hover/btn:scale-110 transition-transform" />
+              GitHub <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+            {repo.homepage && (
+              <a
+                href={repo.homepage} target="_blank" rel="noopener noreferrer"
+                className="flex-1 btn-outline justify-center py-2 text-[12px] rounded-lg border"
+              >
+                Live <Eye className="h-3.5 w-3.5" />
               </a>
-            </Button>
-          )}
-        </CardFooter>
-      </Card>
-    </motion.div>
-  );
+            )}
+          </div>
+        </div>
+      </div>
+    </TiltCard>
+  </motion.div>
+);
 }

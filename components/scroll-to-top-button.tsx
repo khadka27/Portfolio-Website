@@ -1,47 +1,35 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { ArrowUp } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { AnimatePresence, motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function ScrollToTopButton() {
-  const [isVisible, setIsVisible] = useState(false)
-
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) setIsVisible(true)
-    else setIsVisible(false)
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility)
-    return () => window.removeEventListener("scroll", toggleVisibility)
-  }, [])
+    const onScroll = () => setVisible(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          className="fixed bottom-20 right-6 z-50 md:bottom-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
+      {visible && (
+        <motion.button
+          className="fixed bottom-[84px] right-5 z-50 md:bottom-6 grid h-11 w-11 place-items-center rounded-full bg-primary text-white hover:bg-orange-600 active:scale-95 transition-colors duration-200"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Scroll to top"
+          initial={{ opacity: 0, y: 20, scale: 0.85 }}
+          animate={{ opacity: 1, y: 0,  scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.85 }}
           transition={{ duration: 0.2 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
         >
-          <Button
-            onClick={scrollToTop}
-            size="icon"
-            className="rounded-full w-12 h-12 bg-primary/80 hover:bg-primary text-primary-foreground shadow-lg backdrop-blur-sm"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp size={24} />
-          </Button>
-        </motion.div>
+          <ArrowUp className="h-4.5 w-4.5" />
+        </motion.button>
       )}
     </AnimatePresence>
-  )
+  );
 }

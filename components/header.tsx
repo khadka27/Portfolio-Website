@@ -1,179 +1,168 @@
 "use client";
+
 import type React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
-const navItems = [
-  { name: "Home", id: "home" },
-  { name: "About", id: "about" },
-  { name: "Experience", id: "experience" },
-  { name: "Skills", id: "skills" },
-  { name: "Projects", id: "projects" },
-  { name: "Testimonials", id: "testimonials" },
-  { name: "Writing", id: "writing" },
-  { name: "Contact", id: "contact" },
+const NAV = [
+  { label: "Home",       id: "home" },
+  { label: "About",      id: "about" },
+  { label: "Experience", id: "experience" },
+  { label: "Skills",     id: "skills" },
+  { label: "Projects",   id: "projects" },
+  { label: "Writing",    id: "writing" },
+  { label: "Contact",    id: "contact" },
 ];
 
 const Header = () => {
-  const [activeSection, setActiveSection] = useState("home");
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [active, setActive]   = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen]       = useState(false);
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-      const sections = navItems.map((item) => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
-          break;
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 30);
+        const mid = window.scrollY + window.innerHeight * 0.45;
+        for (let i = NAV.length - 1; i >= 0; i--) {
+          const el = document.getElementById(NAV[i].id);
+          if (el && el.offsetTop <= mid) { 
+            setActive(NAV[i].id); 
+            break; 
+          }
         }
-      }
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { 
+      window.removeEventListener("scroll", onScroll); 
+      cancelAnimationFrame(rafRef.current); 
+    };
   }, []);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [mobileMenuOpen]);
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
-  const handleLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    id: string,
-  ) => {
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setMobileMenuOpen(false);
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setOpen(false);
   };
 
   return (
     <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-lg bg-background/80 border-b border-border/20",
-        isScrolled ? "shadow-lg" : "bg-transparent",
+        "fixed z-50 transition-all duration-300 ease-in-out select-none",
+        scrolled
+          ? "top-4 inset-x-0 mx-auto w-[92%] max-w-4xl rounded-full border border-border/80 bg-background/55 backdrop-blur-xl px-5 py-1.5 shadow-lg shadow-black/5"
+          : "top-0 inset-x-0 w-full border-b border-transparent bg-transparent py-4"
       )}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-12 h-16 md:h-20">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="relative text-xl sm:text-2xl font-bold group"
-          aria-label={`${siteConfig.name} — home`}
-        >
-          <span className="bg-linear-to-r from-primary to-amber-500 bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-105">
+      <div 
+        className={cn(
+          "flex items-center justify-between w-full transition-all duration-300",
+          scrolled ? "h-11" : "h-16 md:h-[68px] page-shell"
+        )}
+      >
+        {/* ── Logo ──────────────────────────── */}
+        <Link href="/" aria-label="Home" className="flex items-center gap-2 group cursor-pointer">
+          <Image
+            src="/logo.png"
+            alt="Abishek Khadka Logo"
+            width={32}
+            height={32}
+            className="object-contain transition-transform duration-200 group-hover:scale-110 rounded-full shadow-md shadow-primary/20"
+          />
+          <span className="text-sm font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
             {siteConfig.name}
           </span>
-          <motion.div
-            className="absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-primary to-amber-500"
-            initial={{ width: 0 }}
-            whileHover={{ width: "100%" }}
-            transition={{ duration: 0.3 }}
-          />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav
-          className="hidden md:flex items-center space-x-1 lg:space-x-2"
-          aria-label="Primary"
-        >
-          {navItems.map((item) => (
+        {/* ── Desktop nav ───────────────────── */}
+        <nav className="hidden md:flex items-center gap-1 bg-muted/30 border border-border/20 rounded-full p-0.5" aria-label="Main">
+          {NAV.map(item => (
             <Link
               key={item.id}
               href={`#${item.id}`}
-              onClick={(e) => handleLinkClick(e, item.id)}
+              onClick={e => scrollTo(e, item.id)}
               className={cn(
-                "relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md",
-                "hover:bg-primary/10 hover:text-primary",
-                activeSection === item.id
+                "relative px-4 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 select-none cursor-pointer",
+                active === item.id
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground",
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
-              {item.name}
-              {activeSection === item.id && (
+              {item.label}
+              {active === item.id && (
                 <motion.span
-                  layoutId="underline-desktop"
-                  className="absolute left-0 -bottom-1 block h-0.5 w-full bg-primary"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  layoutId="nav-pill"
+                  className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/15 to-primary/5 border border-primary/20 -z-10 shadow-[0_0_12px_rgba(251,146,60,0.08)]"
+                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
             </Link>
           ))}
         </nav>
 
-        {/* Right side actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* ── Actions ───────────────────────── */}
+        <div className="flex items-center gap-2">
           <ThemeToggle />
-          {/* Mobile menu button */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-md hover:bg-primary/10 transition-colors"
-            aria-label="Toggle mobile menu"
+            onClick={() => setOpen(v => !v)}
+            className="md:hidden p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-muted/70 transition-colors cursor-pointer"
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {open ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile drawer ─────────────────── */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className={cn(
-              "md:hidden glass-effect border-t border-border/50 backdrop-blur-lg",
-            )}
+            key="drawer"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden absolute top-full left-0 right-0 mt-2 mx-2 p-3 rounded-2xl border border-border/80 bg-background/95 backdrop-blur-2xl shadow-xl z-50 flex flex-col gap-1"
           >
-            <nav
-              className="container mx-auto px-6 sm:px-8 lg:px-12 py-4 flex flex-col space-y-1"
-              aria-label="Primary"
-            >
-              {navItems.map((item, index) => (
+            <nav className="flex flex-col gap-1" aria-label="Mobile">
+              {NAV.map((item, i) => (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.03 }}
                 >
                   <Link
                     href={`#${item.id}`}
-                    onClick={(e) => handleLinkClick(e, item.id)}
+                    onClick={e => scrollTo(e, item.id)}
                     className={cn(
-                      "block px-4 py-3 rounded-md text-base font-medium transition-colors duration-200",
-                      "hover:bg-primary/10 hover:text-primary",
-                      activeSection === item.id
-                        ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground",
+                      "flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer",
+                      active === item.id
+                        ? "bg-primary/10 text-primary border border-primary/20"
+                        : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"
                     )}
                   >
-                    {item.name}
+                    {active === item.id && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                    )}
+                    {item.label}
                   </Link>
                 </motion.div>
               ))}
@@ -184,4 +173,5 @@ const Header = () => {
     </motion.header>
   );
 };
+
 export default Header;

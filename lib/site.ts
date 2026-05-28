@@ -146,7 +146,7 @@ export function getRootMetadata(): Metadata {
       type: "website",
       locale: siteConfig.locale,
       url: siteUrl,
-      siteName: `${siteConfig.name} — Portfolio`,
+      siteName: `${siteConfig.name} -Portfolio`,
       title: siteConfig.defaultTitle,
       description: siteConfig.defaultDescription,
       images: [
@@ -154,7 +154,7 @@ export function getRootMetadata(): Metadata {
           url: "/og-image.png",
           width: 1200,
           height: 630,
-          alt: `${siteConfig.name} — Full-stack developer portfolio`,
+          alt: `${siteConfig.name} -Full-stack developer portfolio`,
         },
       ],
     },
