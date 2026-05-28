@@ -151,40 +151,69 @@ export default function CustomCursor() {
         transition: "opacity 0.2s ease-out",
       }}
     >
-      {/* Outer developer cursor ring - lagging spring effect */}
+      {/* Dynamic Cursor Arrow Container (Immediate tracking) */}
       <motion.div
-        className="fixed top-0 left-0 w-9 h-9 border pointer-events-none -ml-[18px] -mt-[18px] will-change-transform mix-blend-difference transition-[border-color,background-color,border-width] duration-200"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          borderColor: isHovered 
-            ? "var(--primary)" 
-            : "color-mix(in srgb, var(--primary) 55%, transparent)",
-          backgroundColor: isHovered 
-            ? "color-mix(in srgb, var(--primary) 12%, transparent)" 
-            : "transparent",
-          borderWidth: isHovered ? "2px" : "1.5px",
-        }}
-        animate={{
-          scale: isClicking ? 0.8 : isHovered ? 1.4 : 1,
-          borderRadius: isHovered ? "8px" : "50%", // Boxy cursor on hover, round on default!
-        }}
-        transition={{ type: "spring", stiffness: 350, damping: 28 }}
-      />
-
-      {/* Inner solid developer dot/cross - fast immediate tracking */}
-      <motion.div
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-primary pointer-events-none -ml-[5px] -mt-[5px] will-change-transform mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none -ml-[4.5px] -mt-[3.5px] will-change-transform z-[2147483647]"
         style={{
           x: cursorX,
           y: cursorY,
         }}
-        animate={{
-          scale: isClicking ? 0.6 : isHovered ? 0.3 : 1,
-          borderRadius: isHovered ? "0%" : "50%", // Square inner pixel on hover, round on default!
-        }}
-        transition={{ type: "spring", stiffness: 450, damping: 25 }}
-      />
+      >
+        <svg 
+          width="32" 
+          height="32" 
+          viewBox="0 0 32 32" 
+          fill="none" 
+          className="overflow-visible"
+        >
+          {/* Radiating sparks around the pointer tip (at 4.5, 3.5) */}
+          <g>
+            {[
+              { x1: 4.5, y1: 1.5, x2: 4.5, y2: -3.5 },     // top
+              { x1: 7.5, y1: 2.0, x2: 11.5, y2: -1.0 },    // top-right
+              { x1: 1.5, y1: 2.0, x2: -2.5, y2: -1.0 },    // top-left
+              { x1: 0.5, y1: 4.5, x2: -4.5, y2: 4.5 },     // left
+              { x1: 1.5, y1: 7.0, x2: -2.5, y2: 10.0 },    // bottom-left
+            ].map((spark, idx) => (
+              <motion.line
+                key={idx}
+                x1={spark.x1}
+                y1={spark.y1}
+                x2={spark.x2}
+                y2={spark.y2}
+                stroke="var(--primary)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                animate={{
+                  scale: (isClicking || isHovered) ? [1, 1.4, 1] : 1,
+                  opacity: (isClicking || isHovered) ? 1 : 0,
+                }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                style={{
+                  transformOrigin: "4.5px 3.5px",
+                  filter: "drop-shadow(0 0 4px var(--primary))"
+                }}
+              />
+            ))}
+          </g>
+
+          {/* Chubby, rounded orange cursor pointer arrow */}
+          <motion.path
+            d="M4.5 3.5v15.2c0 .8.9 1.2 1.5.7l4.4-4.1c.3-.3.7-.4 1.1-.3l5.8 1.6c.8.2 1.4-.6 1-1.2L5.2 3.8c-.2-.2-.5-.3-.7-.3z"
+            fill="var(--primary)"
+            stroke="white"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+            style={{
+              filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.25))"
+            }}
+            animate={{
+              scale: isClicking ? 0.88 : isHovered ? 1.08 : 1,
+            }}
+            transition={{ type: "spring", stiffness: 450, damping: 22 }}
+          />
+        </svg>
+      </motion.div>
 
       {/* Developer Terminal Label tooltip floating beside the cursor */}
       <motion.div
