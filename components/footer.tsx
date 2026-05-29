@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* COLUMN 2: Site Map Links (span 4) */}
           <div className="md:col-span-4 flex flex-col items-start gap-4">
-            <span className="text-xs font-bold text-foreground/80 tracking-widest uppercase flex items-center gap-1 border-b border-border/40 pb-1.5 w-full">
+            <span className="text-xs font-bold text-foreground tracking-widest uppercase flex items-center gap-1 border-b border-border/40 pb-1.5 w-full">
               <Sparkles className="h-3 w-3 text-primary" />
               Navigation Map
             </span>
@@ -97,7 +97,7 @@ export default function Footer() {
                   key={link.id}
                   href={`#${link.id}`}
                   onClick={(e) => handleLinkClick(e, link.id)}
-                  className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center gap-1 group font-medium"
+                  className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center gap-1 group font-medium min-h-[44px]"
                 >
                   <span className="w-1 h-1 rounded-full bg-muted-foreground/30 group-hover:bg-primary transition-colors" />
                   {link.label}
@@ -108,7 +108,7 @@ export default function Footer() {
 
           {/* COLUMN 3: Social & Utility Actions (span 3) */}
           <div className="md:col-span-3 flex flex-col items-start gap-4">
-            <span className="text-xs font-bold text-foreground/80 tracking-widest uppercase flex items-center gap-1 border-b border-border/40 pb-1.5 w-full">
+            <span className="text-xs font-bold text-foreground tracking-widest uppercase flex items-center gap-1 border-b border-border/40 pb-1.5 w-full">
               Connect Channels
             </span>
             
@@ -121,7 +121,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="p-2.5 rounded-full border border-border bg-muted/20 text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 cursor-pointer hover:scale-105 shadow-sm"
+                  className="flex items-center justify-center p-2.5 min-w-[44px] min-h-[44px] rounded-full border border-border bg-muted/20 text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 cursor-pointer hover:scale-105 shadow-sm"
                 >
                   <s.icon className="h-3.5 w-3.5" />
                 </a>
@@ -131,7 +131,7 @@ export default function Footer() {
             {/* Back to top utility */}
             <button
               onClick={handleScrollToTop}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-semibold group cursor-pointer mt-2"
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-semibold group cursor-pointer mt-2 min-h-[44px]"
               aria-label="Scroll to top"
             >
               Back to Top

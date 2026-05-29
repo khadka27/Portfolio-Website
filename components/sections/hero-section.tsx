@@ -182,7 +182,7 @@ export default function HeroSection({ githubProfileImage }: HeroProps) {
               label: "GitHub",
             },
             {
-              href: "https://linkedin.com/in/abishekkhadka",
+              href: "https://linkedin.com/in/khadka27",
               icon: Linkedin,
               label: "LinkedIn",
             },
@@ -193,7 +193,7 @@ export default function HeroSection({ githubProfileImage }: HeroProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="p-2.5 rounded-xl border border-border text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200"
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] p-2.5 rounded-xl border border-border text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200"
             >
               <s.icon className="h-4 w-4" />
             </a>

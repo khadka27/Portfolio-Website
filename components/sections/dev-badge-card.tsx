@@ -88,8 +88,8 @@ export default function DevBadgeCard({ avatarUrl, location = "Pokhara, Nepal" }:
                   src={avatarUrl || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"}
                   alt="Badge Avatar"
                   fill
+                  sizes="112px"
                   className="object-cover"
-                  unoptimized
                 />
                 {/* Horizontal digital scanline animation */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-transparent w-full h-8 animate-[bounce_3s_infinite_ease-in-out] pointer-events-none" />
@@ -105,8 +105,9 @@ export default function DevBadgeCard({ avatarUrl, location = "Pokhara, Nepal" }:
             <div className="space-y-3 relative z-10">
               {/* Name Input */}
               <div className="space-y-1">
-                <label className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest block">PASS HOLDER NAME</label>
+                <label htmlFor="dev-name" className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest block">PASS HOLDER NAME</label>
                 <input
+                  id="dev-name"
                   type="text"
                   maxLength={18}
                   value={name}
@@ -118,8 +119,9 @@ export default function DevBadgeCard({ avatarUrl, location = "Pokhara, Nepal" }:
 
               {/* Class Selector Dropdown */}
               <div className="space-y-1">
-                <label className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest block">DEVELOPER CLASS</label>
+                <label htmlFor="dev-class" className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest block">DEVELOPER CLASS</label>
                 <select
+                  id="dev-class"
                   value={devClass}
                   onChange={(e) => setDevClass(e.target.value)}
                   className="w-full bg-black/40 border border-primary/20 hover:border-primary/40 focus:border-primary focus:outline-none rounded-lg px-2 py-1 text-[11px] font-semibold text-foreground font-mono cursor-pointer"
