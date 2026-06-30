@@ -7,7 +7,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import MobileBottomNav from "@/components/mobile-bottom-nav";
 import { Toaster } from "@/components/ui/toaster";
-import Chatbot from "@/components/chatbot-client";
 import CommandMenu from "@/components/command-menu";
 import JsonLd from "@/components/json-ld";
 import ScrollToTopButton from "@/components/scroll-to-top-button";
@@ -15,7 +14,6 @@ import SkipToContent from "@/components/skip-to-content";
 import ScrollProgress from "@/components/scroll-progress";
 import { getRootMetadata, getSiteJsonLdGraph } from "@/lib/site";
 import CustomCursor from "@/components/ui/custom-cursor";
-import BiosBootLoader from "@/components/bios-boot-loader";
 import TerminalConsole from "@/components/terminal-console";
 import AchievementsTracker from "@/components/achievements-tracker";
 import ThemeConfigurator from "@/components/theme-configurator";
@@ -47,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head></head>
-      <body className={`${inter.variable} ${outfit.variable} ${inter.className}`}>
+      <body className={`${inter.variable} ${outfit.variable} ${inter.className}`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -59,16 +57,14 @@ export default function RootLayout({
           <ScrollProgress />
           <div className="relative flex min-h-screen flex-col overflow-x-hidden w-full">
             <Header />
-            <div className="flex-1 pb-20 md:pb-0">{children}</div>
+            <div className="flex-1 pb-32 md:pb-0">{children}</div>
             <Footer />
           </div>
           <MobileBottomNav />
           <ScrollToTopButton />
-          <Chatbot />
           <CommandMenu />
           <Toaster />
           <CustomCursor />
-          <BiosBootLoader />
           <TerminalConsole />
           <AchievementsTracker />
           <ThemeConfigurator />

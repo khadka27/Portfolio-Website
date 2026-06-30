@@ -155,14 +155,14 @@ export default function GitBranchSimulator() {
       <div className="flex flex-col lg:flex-row gap-6">
         
         {/* SVG Commit Graph Visual Box (Left) */}
-        <div className="flex-1 bg-[#070b13] border border-border/80 rounded-2xl p-5 flex items-center justify-center relative overflow-hidden h-72">
+        <div className="flex-1 bg-[#070b13] border border-border/80 rounded-2xl p-5 flex items-center justify-start lg:justify-center relative overflow-x-auto h-72 custom-scrollbar">
           
           {/* Subtle grid background */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]" />
           
           <svg 
             viewBox="0 0 520 300" 
-            className="w-full h-full max-w-[480px] overflow-visible"
+            className="w-[520px] lg:w-full h-full max-w-[520px] overflow-visible shrink-0"
             xmlns="http://www.w3.org/2000/svg"
           >
             {/* 1. Branch connector pipelines */}

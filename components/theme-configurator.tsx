@@ -13,6 +13,7 @@ export default function ThemeConfigurator() {
 
   // Apply customizations dynamically to :root
   useEffect(() => {
+    document.documentElement.style.setProperty("--primary-hue", `${hue}`);
     document.documentElement.style.setProperty("--primary", `hsl(${hue} 95% 53%)`);
     document.documentElement.style.setProperty("--ring", `hsl(${hue} 95% 53%)`);
   }, [hue]);
@@ -39,8 +40,8 @@ export default function ThemeConfigurator() {
 
   return (
     <>
-      {/* Floating Configurator Toggle Button (Bottom-right, offset left of chatbot) */}
-      <div className="fixed bottom-8 right-[92px] z-[999] flex flex-col items-center">
+      {/* Floating Configurator Toggle Button (Bottom-right FAB position) */}
+      <div className="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-50 flex flex-col items-center">
         <button
           onClick={() => setIsOpen(true)}
           className="group relative flex items-center justify-center w-10 h-10 rounded-xl bg-card border border-border hover:border-primary/50 text-muted-foreground hover:text-primary transition-all duration-200 shadow-md cursor-pointer overflow-hidden"

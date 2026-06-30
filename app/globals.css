@@ -46,13 +46,14 @@
   --secondary-fg: hsl(20 10% 24%);
 
   /* Brand */
-  --primary: hsl(24 95% 53%);
+  --primary-hue: 24;
+  --primary: hsl(var(--primary-hue) 95% 53%);
   --primary-fg: hsl(0 0% 100%);
 
   /* Borders & Inputs */
   --border: hsl(30 12% 86%);
   --input: hsl(30 12% 86%);
-  --ring: hsl(24 95% 53%);
+  --ring: hsl(var(--primary-hue) 95% 53%);
 
   /* Destructive */
   --destructive: hsl(0 72% 51%);
@@ -76,12 +77,12 @@
   --muted-fg: hsl(220 8% 52%);
   --secondary-fg: hsl(36 15% 85%);
 
-  --primary: hsl(24 95% 53%);
+  --primary: hsl(var(--primary-hue) 95% 53%);
   --primary-fg: hsl(0 0% 100%);
 
   --border: hsl(220 10% 18%);
   --input: hsl(220 10% 18%);
-  --ring: hsl(24 95% 53%);
+  --ring: hsl(var(--primary-hue) 95% 53%);
 
   --destructive: hsl(0 62% 50%);
   --destructive-fg: hsl(0 0% 100%);
@@ -140,7 +141,7 @@
   }
 
   *:focus-visible {
-    outline: 2px solid hsl(24 95% 53%);
+    outline: 2px solid hsl(var(--primary-hue) 95% 53%);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -148,7 +149,7 @@
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SCROLLBAR
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -156,15 +157,15 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(24 95% 53% / 0.4);
+  background: hsl(var(--primary-hue) 95% 53% / 0.4);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(24 95% 53% / 0.7);
+  background: hsl(var(--primary-hue) 95% 53% / 0.7);
 }
 html {
   scrollbar-width: thin;
-  scrollbar-color: hsl(24 95% 53% / 0.4) transparent;
+  scrollbar-color: hsl(var(--primary-hue) 95% 53% / 0.4) transparent;
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -216,9 +217,9 @@ footer *:not(button):not(.btn-primary):not(.btn-outline) {
     @apply font-extrabold tracking-tight text-balance;
     background: linear-gradient(
       135deg,
-      hsl(24 95% 53%),
-      #fb923c 48%,
-      #f59e0b 100%
+      hsl(var(--primary-hue) 95% 53%),
+      hsl(calc(var(--primary-hue) + 12) 93% 61%) 48%,
+      hsl(calc(var(--primary-hue) - 10) 96% 47%) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -229,9 +230,14 @@ footer *:not(button):not(.btn-primary):not(.btn-outline) {
     @apply text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto text-balance;
   }
 
-  /* ── ORANGE GRADIENT TEXT ── */
+  /* ── GRADIENT TEXT ── */
   .orange-text {
-    background: linear-gradient(135deg, hsl(24 95% 53%), #fb923c 50%, #f59e0b);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary-hue) 95% 53%),
+      hsl(calc(var(--primary-hue) + 12) 93% 61%) 50%,
+      hsl(calc(var(--primary-hue) - 10) 96% 47%)
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -242,7 +248,7 @@ footer *:not(button):not(.btn-primary):not(.btn-outline) {
     @apply rounded-2xl border border-border bg-card transition-all duration-200;
   }
   .card-base:hover {
-    @apply border-[hsl(24_95%_53%/0.45)];
+    border-color: hsl(var(--primary-hue) 95% 53% / 0.45);
   }
 
   /* ── INLINE TAGS ── */
@@ -261,7 +267,7 @@ footer *:not(button):not(.btn-primary):not(.btn-outline) {
            rounded-xl bg-primary text-white
            px-6 py-3 text-sm font-bold tracking-wide
            transition-all duration-300 active:scale-95;
-    box-shadow: 0 4px 14px 0 hsl(24 95% 53% / 0.3);
+    box-shadow: 0 4px 14px 0 hsl(var(--primary-hue) 95% 53% / 0.3);
   }
   .btn-primary::after {
     content: "";
@@ -280,8 +286,8 @@ footer *:not(button):not(.btn-primary):not(.btn-outline) {
     transition: none;
   }
   .btn-primary:hover {
-    @apply bg-orange-600;
-    box-shadow: 0 6px 20px 0 hsl(24 95% 53% / 0.45);
+    background-color: hsl(var(--primary-hue) 95% 45%);
+    box-shadow: 0 6px 20px 0 hsl(var(--primary-hue) 95% 53% / 0.45);
   }
   .btn-primary:hover::after {
     animation: shine 0.75s ease-in-out;
@@ -296,8 +302,10 @@ footer *:not(button):not(.btn-primary):not(.btn-outline) {
            transition-all duration-300 active:scale-95;
   }
   .btn-outline:hover {
-    @apply border-primary/50 text-primary bg-[hsl(24_95%_53%/0.04)];
-    box-shadow: 0 4px 12px 0 hsl(24 95% 53% / 0.1);
+    border-color: hsl(var(--primary-hue) 95% 53% / 0.5);
+    color: var(--primary);
+    background-color: hsl(var(--primary-hue) 95% 53% / 0.04);
+    box-shadow: 0 4px 12px 0 hsl(var(--primary-hue) 95% 53% / 0.1);
   }
 
   .btn-ghost {
@@ -534,8 +542,8 @@ footer *:not(button):not(.btn-primary):not(.btn-outline) {
    SELECTION COLOR
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 ::selection {
-  background: hsl(24 95% 53% / 0.25);
-  color: hsl(24 95% 53%);
+  background: hsl(var(--primary-hue) 95% 53% / 0.25);
+  color: hsl(var(--primary-hue) 95% 53%);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -25,7 +25,7 @@ const COMMITS_MESSAGES = [
   { msg: "Created CMD+K global actions dialog overlays for keyboard navigation", files: "components/command-menu.tsx", diff: ["-export default function CommandMenu() {", "+export default function CommandMenu() {", "+  const [open, setOpen] = useState(false);", "+  const [search, setSearch] = useState('');", "+  const [selectedIndex, setSelectedIndex] = useState(0);"] },
   { msg: "Integrated Stripe webhooks and payment checkout session APIs", files: "app/api/checkout/route.ts", diff: ["-    const session = await stripe.checkout.sessions.create({", "+    const session = await stripe.checkout.sessions.create({", "+      payment_method_types: ['card'],", "+      billing_address_collection: 'required',", "+      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,"] },
   { msg: "Added Achievements trophy logger and localStorage synchronization", files: "components/achievements-tracker.tsx", diff: ["-export default function AchievementsTracker() {", "+export default function AchievementsTracker() {", "+  const [unlockedIds, setUnlockedIds] = useState<string[]>([]);", "+  const [activeNotification, setActiveNotification] = useState<Achievement | null>(null);"] },
-  { msg: "Implemented chatbot MLC webLLM local models loading states", files: "components/chatbot.tsx", diff: ["-  useEffect(() => {", "+  useEffect(() => {", "+    async function loadEngine() {", "+      setIsEngineLoading(true);", "+      const model = await CreateMLCEngine('Llama-3.2-1B');", "+      setEngine(model);"] },
+  { msg: "Redesigned bento grid layout for client reviews grid section", files: "components/sections/testimonials-section.tsx", diff: ["-export default function TestimonialsSection() {", "+export default function TestimonialsSection() {", "+  return (", "+    <section id=\"testimonials\">", "+      <div className=\"grid grid-cols-1 md:grid-cols-3 gap-6\">"] },
 ];
 
 export default function CommitVisualizer() {
@@ -116,7 +116,7 @@ export default function CommitVisualizer() {
         <span className="chip flex items-center gap-1.5 w-max">
           <GitCommit className="h-3.5 w-3.5 text-primary" /> COMMIT_CONTRIBUTIONS
         </span>
-        <h3 className="text-xl font-bold text-foreground">Interactive Activity Graph</h3>
+        <h3 className="text-xl font-bold text-foreground leading-snug">Interactive Activity Graph</h3>
         <p className="text-xs text-muted-foreground leading-relaxed">
           This board visualizes simulated development contributions over the past 24 weeks. Hover over cells to inspect commit densities, and click any colored box to view git diffs.
         </p>
@@ -133,7 +133,7 @@ export default function CommitVisualizer() {
       </div>
 
       {/* 2. Grid Visual Canvas */}
-      <div className="flex-1 w-full overflow-x-auto py-2 pr-1 scrollbar-none flex flex-col justify-center relative min-w-0">
+      <div className="flex-1 w-full overflow-x-auto py-2 pr-1 custom-scrollbar flex flex-col justify-center relative min-w-0">
         
         <div className="flex gap-[3.5px] w-max mx-auto">
           {weeks.map((week, wIdx) => (

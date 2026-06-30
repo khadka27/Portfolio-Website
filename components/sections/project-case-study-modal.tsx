@@ -22,15 +22,15 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
   default: {
     name: "Portfolio Website",
     tagline: "Interactive developer portfolio with 15+ micro-features",
-    description: "A premium full-stack portfolio built with Next.js 15, featuring real-time components, AI chatbot, interactive games, and dynamic data fetching.",
+    description: "A premium full-stack portfolio built with Next.js 15, featuring real-time components, interactive games, and dynamic data fetching.",
     problem: "Most developer portfolios are static and fail to demonstrate real engineering depth. Visitors leave without understanding what the developer is actually capable of building.",
-    solution: "Built a living, breathing portfolio that functions as a product itself — featuring WebLLM AI, retro arcade, achievements, real-time GitHub data, 3D orbit, and full theme customization.",
+    solution: "Built a living, breathing portfolio that functions as a product itself — featuring a retro arcade, achievements, real-time GitHub data, 3D orbit, and full theme customization.",
     impact: [
       { metric: "15+", label: "Interactive Features" },
       { metric: "99", label: "Lighthouse Score" },
       { metric: "< 1s", label: "First Load" },
     ],
-    stack: ["Next.js 15", "TypeScript", "Framer Motion", "Tailwind CSS", "WebLLM", "EmailJS"],
+    stack: ["Next.js 15", "TypeScript", "Framer Motion", "Tailwind CSS", "EmailJS"],
     github: "https://github.com/khadka27",
     live: "#",
     color: "from-orange-500/20 to-amber-500/10",

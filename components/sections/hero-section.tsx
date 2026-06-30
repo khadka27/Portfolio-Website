@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -28,6 +29,14 @@ interface HeroProps {
 export default function HeroSection({ githubProfileImage }: HeroProps) {
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  useEffect(() => {
+    // Reset scroll restoration to manual and scroll to top on mount
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section
@@ -208,34 +217,34 @@ export default function HeroSection({ githubProfileImage }: HeroProps) {
         transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-full md:w-[44%] flex justify-center"
       >
-        <TiltCard className="relative flex items-center justify-center p-10">
-          {/* Spinning rings */}
-          <div className="anim-spin-cw  absolute inset-[-20px] rounded-full border border-primary/20" />
-          <div className="anim-spin-ccw absolute inset-[-42px] rounded-full border border-primary/10 border-dashed" />
+        <TiltCard className="relative flex items-center justify-center p-6 sm:p-8">
+          {/* Tech grid corners/borders instead of circular rings */}
+          <div className="absolute inset-0 border border-primary/20 rounded-3xl" />
+          <div className="absolute inset-[-12px] border border-primary/10 border-dashed rounded-[32px] pointer-events-none" />
 
-          {/* Orange glow behind image */}
-          <div className="absolute inset-0 rounded-full bg-primary/15 blur-3xl scale-90" />
+          {/* Orange glow behind image card */}
+          <div className="absolute inset-0 rounded-3xl bg-primary/15 blur-3xl scale-95" />
 
-          {/* Profile photo */}
-          <div className="relative h-48 w-48 sm:h-60 sm:w-60 md:h-72 md:w-72 lg:h-80 lg:w-80 overflow-hidden rounded-full border-4 border-background ring-2 ring-primary/30">
+          {/* Profile photo - full size rectangular card with rounded corners */}
+          <div className="relative w-64 h-80 sm:w-72 sm:h-96 md:w-80 md:h-[400px] overflow-hidden rounded-2xl border border-border bg-[#080c14] shadow-2xl">
             <Image
               src={githubProfileImage || "/placeholder.svg"}
-              alt={`${siteConfig.name} -full-stack developer`}
+              alt={`${siteConfig.name} - full-stack developer`}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               priority
             />
           </div>
 
           {/* Floating chip -bottom right */}
-          <motion.div className="anim-float absolute bottom-3 right-0 sm:-right-2 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-md">
+          <motion.div className="anim-float absolute bottom-2 right-2 sm:-right-2 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-md z-20">
             <Code2 className="h-3.5 w-3.5 text-primary" />
             Full-Stack Dev
           </motion.div>
 
           {/* Floating chip -top left */}
           <motion.div
-            className="anim-float absolute top-3 left-0 sm:-left-2 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-md"
+            className="anim-float absolute top-2 left-2 sm:-left-2 flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-md z-20"
             style={{ animationDelay: "1.8s" }}
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-500" />
