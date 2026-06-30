@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CalendarDays, ExternalLink, PenLine } from "lucide-react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Post {
   id: string;
@@ -153,11 +154,11 @@ export default function WritingSection() {
                 {post.imageUrl &&
                 !post.imageUrl.includes("TGH72N1I0qf3g_5p-h2fXg") ? (
                   <div className="relative w-full h-44 overflow-hidden bg-muted">
-                    <img
+                    <Image
                       src={post.imageUrl}
                       alt={post.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 ) : (

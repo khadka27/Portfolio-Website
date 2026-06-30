@@ -60,6 +60,8 @@ const MobileBottomNav = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
       setActiveSection(id)
+      // Clear hash so reload doesn't re-scroll to this section
+      history.replaceState(null, "", window.location.pathname)
     }
   }
 

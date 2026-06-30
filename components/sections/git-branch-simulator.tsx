@@ -43,10 +43,12 @@ export default function GitBranchSimulator() {
     theme: true
   });
 
-  const consoleEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    consoleEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
   }, [consoleLogs]);
 
   // Handle click node
@@ -282,7 +284,7 @@ export default function GitBranchSimulator() {
               <span>GIT CONSOLE LOGS</span>
             </div>
             
-            <div className="flex-1 p-3 overflow-y-auto font-mono text-[10px] text-amber-500/80 space-y-0.5 custom-scrollbar">
+            <div ref={scrollContainerRef} className="flex-1 p-3 overflow-y-auto font-mono text-[10px] text-amber-500/80 space-y-0.5 custom-scrollbar">
               {consoleLogs.map((log, idx) => (
                 <div 
                   key={idx} 
@@ -297,7 +299,6 @@ export default function GitBranchSimulator() {
                   {log}
                 </div>
               ))}
-              <div ref={consoleEndRef} />
             </div>
           </div>
 

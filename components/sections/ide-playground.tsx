@@ -142,10 +142,12 @@ export default function IDEPlayground() {
   const [isRunning, setIsRunning] = useState(false);
   const [runHistory, setRunHistory] = useState<Set<string>>(new Set());
 
-  const consoleEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    consoleEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
   }, [consoleLogs]);
 
   // Run the current script
@@ -370,7 +372,7 @@ export default function IDEPlayground() {
             </div>
             
             {/* Logs console area */}
-            <div className="flex-1 p-4 overflow-y-auto font-mono text-xs text-amber-500/90 space-y-1 custom-scrollbar">
+            <div ref={scrollContainerRef} className="flex-1 p-4 overflow-y-auto font-mono text-xs text-amber-500/90 space-y-1 custom-scrollbar">
               {consoleLogs.map((log, idx) => (
                 <div 
                   key={idx} 
@@ -385,7 +387,6 @@ export default function IDEPlayground() {
                   {log}
                 </div>
               ))}
-              <div ref={consoleEndRef} />
             </div>
           </div>
         </div>

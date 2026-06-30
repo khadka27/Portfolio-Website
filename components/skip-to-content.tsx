@@ -8,7 +8,7 @@ const SkipToContent: React.FC = () => {
     const mainContent = document.getElementById("main-content")
     if (mainContent) {
       mainContent.setAttribute("tabindex", "-1")
-      mainContent.focus()
+      mainContent.focus({ preventScroll: true })
     }
   }
 

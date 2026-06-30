@@ -56,6 +56,8 @@ const Header = () => {
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    // Clear hash so reload doesn't re-scroll to this section
+    history.replaceState(null, "", window.location.pathname);
     setOpen(false);
   };
 

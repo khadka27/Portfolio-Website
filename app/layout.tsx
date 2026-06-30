@@ -7,21 +7,22 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import MobileBottomNav from "@/components/mobile-bottom-nav";
 import { Toaster } from "@/components/ui/toaster";
-import CommandMenu from "@/components/command-menu";
 import JsonLd from "@/components/json-ld";
 import ScrollToTopButton from "@/components/scroll-to-top-button";
 import SkipToContent from "@/components/skip-to-content";
 import ScrollProgress from "@/components/scroll-progress";
 import { getRootMetadata, getSiteJsonLdGraph } from "@/lib/site";
-import CustomCursor from "@/components/ui/custom-cursor";
-import TerminalConsole from "@/components/terminal-console";
-import AchievementsTracker from "@/components/achievements-tracker";
-import ThemeConfigurator from "@/components/theme-configurator";
-import RetroArcade from "@/components/retro-arcade";
-import KonamiEasterEgg from "@/components/konami-easter-egg";
-import SpotifyWidget from "@/components/spotify-widget";
+import dynamic from "next/dynamic";
 
-
+// Dynamically import heavy UI overlays & widgets
+const CommandMenu = dynamic(() => import("@/components/command-menu"));
+const CustomCursor = dynamic(() => import("@/components/ui/custom-cursor"));
+const TerminalConsole = dynamic(() => import("@/components/terminal-console"));
+const AchievementsTracker = dynamic(() => import("@/components/achievements-tracker"));
+const ThemeConfigurator = dynamic(() => import("@/components/theme-configurator"));
+const RetroArcade = dynamic(() => import("@/components/retro-arcade"));
+const KonamiEasterEgg = dynamic(() => import("@/components/konami-easter-egg"));
+const SpotifyWidget = dynamic(() => import("@/components/spotify-widget"));
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -44,7 +45,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head></head>
+      <head>
+        {/* Prevent browser from restoring scroll position or jumping to URL hash on reload */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
+              if (window.location.hash) {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+              }
+              window.scrollTo(0, 0);
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${outfit.variable} ${inter.className}`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"

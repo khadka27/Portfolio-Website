@@ -28,13 +28,7 @@ export default function ProjectCard({
 }) {
   const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ amount: 0.1, once: true }}
-      transition={{ delay: index * 0.07, duration: 0.55, ease: [0.22,1,0.36,1] }}
-      className="h-full"
-    >
+    <div className="h-full">
       <TiltCard className="h-full">
         <div className="group card-base h-full flex flex-col overflow-hidden">
         {/* Top orange reveal bar */}
@@ -120,6 +114,6 @@ export default function ProjectCard({
       open={caseStudyOpen}
       onClose={() => setCaseStudyOpen(false)}
     />
-  </motion.div>
+  </div>
 );
 }

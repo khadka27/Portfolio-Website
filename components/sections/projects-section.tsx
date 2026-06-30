@@ -46,7 +46,7 @@ export default async function ProjectsSection() {
   const repos = await getRepos();
 
   return (
-    <section id="projects" className="section-shell">
+    <section id="projects" className="section-shell" suppressHydrationWarning>
       {/* ── Header ──────────────────────────── */}
       <ProjectsHeader />
 
