@@ -268,7 +268,7 @@ export default function HeroSection({ githubProfileImage }: HeroProps) {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={s.label}
+                  aria-label={`Abishek Khadka on ${s.label}`}
                   whileHover={{ scale: 1.12, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center justify-center w-10 h-10 rounded-xl border border-border text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200"

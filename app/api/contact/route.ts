@@ -234,7 +234,7 @@ export async function POST(request: Request) {
                                         </a>
                                       </td>
                                       <td style="padding: 0 8px;">
-                                        <a href="https://linkedin.com/in/abishekkhadka" target="_blank" style="background-color: #0077b5; border-radius: 8px; color: #ffffff; display: inline-block; font-size: 12px; font-weight: 600; padding: 10px 16px; text-decoration: none;">
+                                        <a href="https://linkedin.com/in/khadka27" target="_blank" style="background-color: #0077b5; border-radius: 8px; color: #ffffff; display: inline-block; font-size: 12px; font-weight: 600; padding: 10px 16px; text-decoration: none;">
                                           LinkedIn
                                         </a>
                                       </td>

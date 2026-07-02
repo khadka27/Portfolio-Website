@@ -80,7 +80,7 @@ const Header = () => {
         )}
       >
         {/* ── Logo ──────────────────────────── */}
-        <Link href="/" aria-label="Home" className="flex items-center gap-2 group cursor-pointer">
+        <Link id="header-logo-link" href="/" aria-label="Home" className="flex items-center gap-2 group cursor-pointer">
           <Image
             src="/logo.png"
             alt="Abishek Khadka Logo"
@@ -98,6 +98,7 @@ const Header = () => {
           {NAV.map(item => (
             <Link
               key={item.id}
+              id={`header-nav-link-${item.id}`}
               href={`#${item.id}`}
               onClick={e => scrollTo(e, item.id)}
               className={cn(
@@ -123,6 +124,7 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <button
+            id="header-mobile-menu-toggle"
             onClick={() => setOpen(v => !v)}
             className="md:hidden p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-muted/70 transition-colors cursor-pointer"
             aria-label="Toggle menu"
@@ -152,6 +154,7 @@ const Header = () => {
                   transition={{ delay: i * 0.03 }}
                 >
                   <Link
+                    id={`header-mobile-nav-link-${item.id}`}
                     href={`#${item.id}`}
                     onClick={e => scrollTo(e, item.id)}
                     className={cn(

@@ -9,6 +9,7 @@ export const siteConfig = {
   url: siteUrl,
   name: "Abishek Khadka",
   email: "abishekkhadka90@gmail.com",
+  birthDate: "2002-05-09",
   /** Default `<title>` and OG name */
   defaultTitle: "Abishek Khadka | Full-Stack Developer & Freelancer from Nepal",
   defaultDescription:
@@ -20,16 +21,36 @@ export const siteConfig = {
     "https://github.com/khadka27",
     "https://linkedin.com/in/khadka27",
     "https://twitter.com/khadka_27",
+    "https://instagram.com/khadka_27",
+    // facebook
+    "https://facebook.com/khadka27",
+    // youtube
+    "https://youtube.com/khadka27",
+
   ],
   keywords: [
     "Abishek Khadka",
+    "khadka27",
+    "Abishek Khadka Portfolio",
+    "khadka27 Portfolio",
+    "Abishek Khadka Developer",
+    "Abishek Khadka GitHub",
+    "Abishek Khadka LinkedIn",
+    "Abishek Khadka Twitter",
+    "Abishek Khadka Facebook",
+    "Abishek Khadka Instagram",
+    "Abishek Khadka Youtube",
+    "Abhishek Khadka",
+    "Abhishek Khadka Developer",
+    "Abhishek Khadka Portfolio",
+    "Abhishek Khadka Age",
+    "Abishek Khadka Age",
     "Full Stack Developer Nepal",
     "Freelance Web Developer Nepal",
     "Next.js Developer",
     "Node.js Developer",
     "React Developer",
     "Pokhara",
-    "khadka27",
     "MERN Stack",
     "Socket.io",
     "Stripe",
@@ -58,6 +79,7 @@ export function getSiteJsonLdGraph() {
     },
     sameAs: [...siteConfig.sameAs],
     email: siteConfig.email,
+    birthDate: siteConfig.birthDate,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Pokhara",
@@ -111,6 +133,11 @@ export function getSiteJsonLdGraph() {
 /** Root layout metadata (merged with route segments). */
 export function getRootMetadata(): Metadata {
   const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+  const bing = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+
+  const verification: Record<string, any> = {};
+  if (google) verification.google = google;
+  if (bing) verification.other = { "msvalidate.01": bing };
 
   return {
     metadataBase: new URL(siteUrl),
@@ -129,7 +156,7 @@ export function getRootMetadata(): Metadata {
       telephone: false,
     },
     alternates: {
-      canonical: "/",
+      canonical: siteUrl,
     },
     robots: {
       index: true,
@@ -143,10 +170,14 @@ export function getRootMetadata(): Metadata {
       },
     },
     openGraph: {
-      type: "website",
+      type: "profile",
+      firstName: "Abishek",
+      lastName: "Khadka",
+      username: "khadka27",
+      emails: [siteConfig.email],
       locale: siteConfig.locale,
       url: siteUrl,
-      siteName: `${siteConfig.name} -Portfolio`,
+      siteName: `${siteConfig.name} - Portfolio`,
       title: siteConfig.defaultTitle,
       description: siteConfig.defaultDescription,
       images: [
@@ -154,7 +185,7 @@ export function getRootMetadata(): Metadata {
           url: "/og-image.png",
           width: 1200,
           height: 630,
-          alt: `${siteConfig.name} -Full-stack developer portfolio`,
+          alt: `${siteConfig.name} - Full-stack developer portfolio`,
         },
       ],
     },
@@ -164,7 +195,14 @@ export function getRootMetadata(): Metadata {
       description: siteConfig.defaultDescription,
       creator: siteConfig.twitterHandle,
       site: siteConfig.twitterHandle,
-      images: ["/twitter-image.png"],
+      images: [
+        {
+          url: "/twitter-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${siteConfig.name} - X/Twitter Card Preview`,
+        },
+      ],
     },
     manifest: "/site.webmanifest",
     icons: {
@@ -172,12 +210,6 @@ export function getRootMetadata(): Metadata {
       apple: "/apple-touch-icon.png",
     },
     category: "technology",
-    ...(google
-      ? {
-          verification: {
-            google,
-          },
-        }
-      : {}),
+    ...(Object.keys(verification).length > 0 ? { verification } : {}),
   };
 }

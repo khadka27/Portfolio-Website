@@ -1,9 +1,9 @@
-"use client";
+  "use client";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Github, Linkedin, Twitter, Instagram, Mail, ArrowUp, Sparkles, Star } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, Mail, ArrowUp, Sparkles, Star, Facebook, Youtube } from "lucide-react";
 import VisitorCounter from "./visitor-counter";
 import { siteConfig } from "@/lib/site";
 
@@ -12,6 +12,8 @@ const SOCIALS = [
   { icon: Linkedin,  href: "https://linkedin.com/in/khadka27",       label: "LinkedIn"  },
   { icon: Twitter,   href: "https://twitter.com/khadka_27",          label: "Twitter"   },
   { icon: Instagram, href: "https://instagram.com/khadka_27",        label: "Instagram" },
+  { icon: Facebook,  href: "https://facebook.com/khadka27",           label: "Facebook"  },
+  { icon: Youtube,   href: "https://youtube.com/khadka27",            label: "YouTube"   },
   { icon: Mail,      href: `mailto:${siteConfig.email}`,             label: "Email"     },
 ];
 
@@ -91,19 +93,22 @@ export default function Footer() {
               <Sparkles className="h-3 w-3 text-primary" />
               Navigation Map
             </span>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 w-full">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.id}
-                  href={`#${link.id}`}
-                  onClick={(e) => handleLinkClick(e, link.id)}
-                  className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center gap-1 group font-medium min-h-[44px]"
-                >
-                  <span className="w-1 h-1 rounded-full bg-muted-foreground/30 group-hover:bg-primary transition-colors" />
-                  {link.label}
-                </a>
-              ))}
-            </div>
+            <nav className="w-full" aria-label="Footer Navigation">
+              <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 w-full">
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.id}
+                    id={`footer-nav-link-${link.id}`}
+                    href={`#${link.id}`}
+                    onClick={(e) => handleLinkClick(e, link.id)}
+                    className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center gap-1 group font-medium min-h-[44px]"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-muted-foreground/30 group-hover:bg-primary transition-colors" />
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </nav>
           </div>
 
           {/* COLUMN 3: Social & Utility Actions (span 3) */}
@@ -117,10 +122,11 @@ export default function Footer() {
               {SOCIALS.map((s) => (
                 <a
                   key={s.label}
+                  id={`footer-social-link-${s.label.toLowerCase()}`}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={s.label}
+                  aria-label={s.label === "Email" ? "Email Abishek Khadka" : `Abishek Khadka on ${s.label}`}
                   className="flex items-center justify-center p-2.5 min-w-[44px] min-h-[44px] rounded-full border border-border bg-muted/20 text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 cursor-pointer hover:scale-105 shadow-sm"
                 >
                   <s.icon className="h-3.5 w-3.5" />
@@ -130,6 +136,7 @@ export default function Footer() {
 
             {/* Back to top utility */}
             <button
+              id="footer-scroll-to-top"
               onClick={handleScrollToTop}
               className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors font-semibold group cursor-pointer mt-2 min-h-[44px]"
               aria-label="Scroll to top"

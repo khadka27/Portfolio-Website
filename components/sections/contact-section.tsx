@@ -53,11 +53,11 @@ const METHODS = [
 ];
 
 const SOCIALS = [
-  { icon: Github, href: "https://github.com/khadka27", label: "GitHub" },
+  { icon: Github, href: "https://github.com/khadka27", label: "Abishek Khadka on GitHub" },
   {
     icon: Linkedin,
-    href: "https://linkedin.com/in/abishekkhadka",
-    label: "LinkedIn",
+    href: "https://linkedin.com/in/khadka27",
+    label: "Abishek Khadka on LinkedIn",
   },
 ];
 
