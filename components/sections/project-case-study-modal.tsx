@@ -30,7 +30,7 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
       { metric: "99", label: "Lighthouse Score" },
       { metric: "< 1s", label: "First Load" },
     ],
-    stack: ["Next.js 15", "TypeScript", "Framer Motion", "Tailwind CSS", "EmailJS"],
+    stack: ["Next.js 15", "TypeScript", "Framer Motion", "Tailwind CSS", "Nodemailer"],
     github: "https://github.com/khadka27",
     live: "#",
     color: "from-orange-500/20 to-amber-500/10",

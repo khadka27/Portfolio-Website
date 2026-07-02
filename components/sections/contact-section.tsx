@@ -3,7 +3,6 @@
 import type React from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -81,29 +80,51 @@ export default function ContactSection() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending(true);
-    const sid = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
-    const tid = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
-    const pk = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
-    if (!sid || !tid || !pk) {
-      toast({
-        title: "Config error",
-        description: "EmailJS not configured.",
-        variant: "destructive",
-      });
-      setSending(false);
-      return;
-    }
     try {
-      await emailjs.send(sid, tid, form, pk);
-      toast({
-        title: "Message sent!",
-        description: "I'll get back to you soon.",
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message.");
+      }
+
+      // If Ethereal test email was generated, display preview URL
+      if (data.previewUrl) {
+        console.log("Ethereal test email preview URL:", data.previewUrl);
+        toast({
+          title: "Message sent (Test Account)!",
+          description: (
+            <span>
+              I'll get back to you soon. Test URL:{" "}
+              <a
+                href={data.previewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline font-semibold hover:text-amber-400"
+              >
+                View Email
+              </a>
+            </span>
+          ),
+        });
+      } else {
+        toast({
+          title: "Message sent!",
+          description: "I'll get back to you soon.",
+        });
+      }
       setForm({ name: "", email: "", message: "" });
-    } catch {
+    } catch (err: any) {
       toast({
         title: "Error",
-        description: "Something went wrong. Try again.",
+        description: err.message || "Something went wrong. Try again.",
         variant: "destructive",
       });
     } finally {
